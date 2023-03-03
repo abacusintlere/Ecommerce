@@ -12,8 +12,8 @@
                     </div>
                     <div class="topbar-menu right-menu">
                         <ul>
-                            <li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
-                            <li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
+
+
                             <li class="menu-item lang-menu menu-item-has-children parent">
                                 <a title="English" href="#"><span class="img label-before"><img src="assets/images/lang-en.png" alt="lang-en"></span>English<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                 <ul class="submenu lang" >
@@ -37,6 +37,31 @@
                                     </li>
                                 </ul>
                             </li>
+
+                            @auth
+                                <li class="menu-item menu-item-has-children parent" >
+                                    <a title="My Account" href="#">My Account ({{ Auth::user()->name }})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                                    <ul class="submenu curency" >
+                                        <li class="menu-item" >
+                                            <a title="Pound (GBP)" href="#">Dashboard</a>
+                                        </li>
+                                        <li class="menu-item" >
+                                            <a title="Pound (GBP)" href="#">Profile</a>
+                                        </li>
+                                        <form action="{{ route('logout')}}" method="post">
+                                            @method('post')
+                                            @csrf
+                                            <li class="menu-item" >
+                                                <a title="Pound (GBP)" onclick="event.preventDefault(); .closest('form').submit();" href="#">Logout</a>
+                                            </li>
+                                        </form>
+
+                                    </ul>
+                                </li>
+                            @else
+                                <li class="menu-item" ><a title="Register or Login" href="login.html">Login</a></li>
+                                <li class="menu-item" ><a title="Register or Login" href="register.html">Register</a></li>
+                            @endauth
                         </ul>
                     </div>
                 </div>
