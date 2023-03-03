@@ -8,6 +8,6 @@ class PrivacyPolicyComponent extends Component
 {
     public function render()
     {
-        return view('livewire.privacy-policy-component');
+        return view('livewire.privacy-policy-component')->layout('layouts.base');
     }
 }
