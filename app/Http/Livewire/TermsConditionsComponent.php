@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\TermCondition;
 use Livewire\Component;
 
 class TermsConditionsComponent extends Component
 {
     public function render()
     {
-        return view('livewire.terms-conditions-component')->layout('layouts.base');
+        $terms_conditions = TermCondition::first();
+        return view('livewire.terms-conditions-component',compact('terms_conditions'))->layout('layouts.base');
     }
 }

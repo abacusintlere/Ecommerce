@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('thumbnail')->nullable();
             $table->text('images')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete()->onUpdate();
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

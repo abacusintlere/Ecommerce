@@ -2,12 +2,14 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\PrivacyPolicy;
 use Livewire\Component;
 
 class PrivacyPolicyComponent extends Component
 {
     public function render()
     {
-        return view('livewire.privacy-policy-component')->layout('layouts.base');
+        $privacy_policy = PrivacyPolicy::first();
+        return view('livewire.privacy-policy-component', compact('privacy_policy'))->layout('layouts.base');
     }
 }
