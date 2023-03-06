@@ -30,13 +30,9 @@ class Category extends Model
     }
 
 
-    public function name():Attribute
+    public function getNameAttribute($value)
     {
-        return new Attribute(
-            set:fn($value)=>[
-                'name' => $value,
-                'slug' => Str::slug($value)
-            ]
-        );
+        $this->attributes['name'] = strtolower($value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 }
