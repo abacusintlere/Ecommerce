@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('return_policies', function (Blueprint $table) {
             $table->id();
+            $table->longText('return_policies')->nullable();
             $table->timestamps();
         });
     }
