@@ -18,7 +18,7 @@ class CategoryFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->name(),
+            'name' => $this->faker->unique()->words($nb =3, $asText=true),
         ];
     }
 }
