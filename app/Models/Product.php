@@ -32,4 +32,10 @@ class Product extends Model
         $this->attributes['name'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);
     }
+
+    // A Product Belongs to a Particular Category
+    public function category()
+    {
+        $this->belongsTo(Category::class,'category_id', 'id');
+    }
 }

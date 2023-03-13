@@ -5,12 +5,14 @@ use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\AboutUsComponent;
+use App\Http\Livewire\DetailsComponent;
+use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\ContactUsComponent;
-use App\Http\Livewire\DetailsComponent;
-use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
+use App\Http\Livewire\PrivacyPolicyComponent;
+use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\TermsConditionsComponent;
 
 /*
@@ -30,6 +32,10 @@ Route::get('/', HomeComponent::class)->name('home');
 Route::get('shop', ShopComponent::class)->name('shop');
 // Product Details
 Route::get('product/details/{slug}', DetailsComponent::class)->name('product.details');
+// For Getting Products of a Particular Category
+Route::get('products-category/{category_slug}', CategoryComponent::class)->name('products.category');
+// For Searching Product 
+Route::get('product/search', SearchComponent::class)->name('product.search');
 // Cart Component
 Route::get('cart', CartComponent::class)->name('cart');
 // Check Out Component

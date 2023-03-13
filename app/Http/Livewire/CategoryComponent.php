@@ -8,42 +8,45 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
-class ShopComponent extends Component
+class CategoryComponent extends Component
 {
     use WithPagination;
 
-    public $sorting, $pagesize;
+    public $sorting, $pagesize, $category_slug;
 
     // Mount Function
-    public function mount()
+    public function mount($category_slug)
     {
         $this->sorting = "default";
         $this->pagesize = 12;
+        $this->category_slug = $category_slug;
     } 
 
     public function render()
     {
+        $category = Category::where('slug', $this->category_slug)->first();
+        $category_id = $category->id;
         if($this->sorting == "data")
         {
-            $products = Product::where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::where('category_id', $category_id)->where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         elseif($this->sorting == "price")
         {
-            $products = Product::where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::where('category_id', $category_id)->where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
  
         }
         elseif($this->sorting == "price-desc")
         {
-            $products = Product::where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::where('category_id', $category_id)->where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         else
         {
-            $products = Product::paginate($this->pagesize);
+            $products = Product::where('category_id', $category_id)->paginate($this->pagesize);
  
         }
         $papular_products = Product::where('featured', true)->take(4)->get();
         $categories = Category::where('is_active', 1)->get();
-        return view('livewire.shop-component', compact('products','papular_products','categories'))->layout('layouts.base');
+        return view('livewire.category-component', compact('products','papular_products','categories', 'category'))->layout('layouts.base');
     }
 
     // For Storing Product Into Cart

@@ -7,6 +7,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartComponent extends Component
 {
+
     public function render()
     {
         return view('livewire.cart-component')->layout('layouts.base');
