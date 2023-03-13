@@ -8,6 +8,7 @@ use App\Http\Livewire\AboutUsComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\ContactUsComponent;
+use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\TermsConditionsComponent;
@@ -27,6 +28,8 @@ use App\Http\Livewire\TermsConditionsComponent;
 Route::get('/', HomeComponent::class)->name('home');
 // Shop Component
 Route::get('shop', ShopComponent::class)->name('shop');
+// Product Details
+Route::get('product/details/{slug}', DetailsComponent::class)->name('product.details');
 // Cart Component
 Route::get('cart', CartComponent::class)->name('cart');
 // Check Out Component
