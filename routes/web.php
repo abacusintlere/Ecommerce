@@ -56,11 +56,24 @@ Route::get('privacy-policy', PrivacyPolicyComponent::class)->name('privacy.polic
 
 
 
-// Authentication Routes
+// Authentication Routes For User
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
+    'verified',
+    'role:User'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
+
+// Authentication Routes For Admin
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'role:Admin'
 ])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');

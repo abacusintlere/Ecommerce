@@ -18,6 +18,6 @@ class HeaderSearchComponent extends Component
     public function render()
     {
         $categories = Category::where('is_active', 1)->get();
-        return view('livewire.header-search-component', compact('categories'));
+        return view('livewire.header-search-component', compact('categories', 'product_cat', 'product_cat_id'));
     }
 }

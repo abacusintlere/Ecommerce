@@ -63,7 +63,7 @@ class SearchComponent extends Component
         }
         $papular_products = Product::where('featured', true)->take(4)->get();
         $categories = Category::where('is_active', 1)->get();
-        return view('livewire.shop-component', compact('products','papular_products','categories'))->layout('layouts.base');
+        return view('livewire.search-component', compact('products','papular_products','categories'))->layout('layouts.base');
     }
 
     // For Storing Product Into Cart
