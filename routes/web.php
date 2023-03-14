@@ -4,6 +4,7 @@ use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
 use Illuminate\Support\Facades\Route;
+use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\AboutUsComponent;
 use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\CategoryComponent;
@@ -12,8 +13,12 @@ use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
-use App\Http\Livewire\SearchComponent;
 use App\Http\Livewire\TermsConditionsComponent;
+use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\Admin\AdminCategoryComponent;
+use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\AdminAddCategoryComponent;
+use App\Http\Livewire\Admin\AdminEditCategoryComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,9 +68,8 @@ Route::middleware([
     'verified',
     'role:User'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // User Dashboard
+    Route::get('user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
 });
 
 // Authentication Routes For Admin
@@ -75,7 +79,12 @@ Route::middleware([
     'verified',
     'role:Admin'
 ])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
+    // Admin Dashboard
+    Route::get('admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+    // Admin Categories
+    Route::get('admin/categories', AdminCategoryComponent::class)->name('admin.categories');
+    // For Category Addition
+    Route::get('admin/category/add', AdminAddCategoryComponent::class)->name('admin.add.category');
+    // For Editing Category
+    Route::get('admin/category/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.edit.category');
 });

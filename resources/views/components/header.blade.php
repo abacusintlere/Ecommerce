@@ -39,12 +39,25 @@
                             </li>
 
                             @auth
+
                                 <li class="menu-item menu-item-has-children parent" >
                                     <a title="My Account" href="#">My Account ({{ Auth::user()->name }})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <ul class="submenu curency" >
-                                        <li class="menu-item" >
-                                            <a title="Pound (GBP)" href="#">Dashboard</a>
-                                        </li>
+                                        {{-- For Admin --}}
+                                        @if (Auth::role('Admin'))
+                                            <li class="menu-item" >
+                                                <a title="Admin Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
+                                            </li>
+                                            <li class="menu-item" >
+                                                <a title="Admin Categories" href="{{ route('admin.categories') }}">Categories</a>
+                                            </li>
+                                        @endif
+                                        {{-- For User  --}}
+                                        @if (Auth::role('Admin'))
+                                            <li class="menu-item" >
+                                                <a title="User Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
+                                            </li>
+                                        @endif
                                         <li class="menu-item" >
                                             <a title="Pound (GBP)" href="#">Profile</a>
                                         </li>
