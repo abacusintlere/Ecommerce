@@ -51,6 +51,12 @@
                                             <li class="menu-item" >
                                                 <a title="Admin Categories" href="{{ route('admin.categories') }}">Categories</a>
                                             </li>
+                                            <li class="menu-item" >
+                                                <a title="Admin Categories" href="{{ route('admin.products') }}">All Products</a>
+                                            </li>
+                                            <li class="menu-item" >
+                                                <a title="Admin Categories" href="{{ route('admin.sliders') }}">Manage Home Sliders</a>
+                                            </li>
                                         @endif
                                         {{-- For User  --}}
                                         @if (Auth::role('Admin'))

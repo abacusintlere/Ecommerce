@@ -15,10 +15,16 @@ use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\TermsConditionsComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
-use App\Http\Livewire\Admin\AdminCategoryComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
-use App\Http\Livewire\Admin\AdminAddCategoryComponent;
-use App\Http\Livewire\Admin\AdminEditCategoryComponent;
+use App\Http\Livewire\Admin\Product\AdminProductComponent;
+use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
+use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
+use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
+use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
+use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
+use App\Http\Livewire\Admin\HomeSlider\AdminHomeSliderComponent;
+use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
+use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -81,10 +87,25 @@ Route::middleware([
 ])->group(function () {
     // Admin Dashboard
     Route::get('admin/dashboard', AdminDashboardComponent::class)->name('admin.dashboard');
+    ################################## Category ########################################
     // Admin Categories
     Route::get('admin/categories', AdminCategoryComponent::class)->name('admin.categories');
     // For Category Addition
     Route::get('admin/category/add', AdminAddCategoryComponent::class)->name('admin.add.category');
     // For Editing Category
     Route::get('admin/category/edit/{category_slug}', AdminEditCategoryComponent::class)->name('admin.edit.category');
+
+    ################################## Product ########################################
+    Route::get('admin/products', AdminProductComponent::class)->name('admin.products');
+    // For Category Addition
+    Route::get('admin/product/add', AdminAddProductComponent::class)->name('admin.add.product');
+    // For Editing Category
+    Route::get('admin/product/edit/{product_slug}', AdminEditProductComponent::class)->name('admin.edit.product');
+
+    ################################## Home Page Slider ########################################
+    Route::get('admin/sliders', AdminHomeSliderComponent::class)->name('admin.sliders');
+    // For Category Addition
+    Route::get('admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.add.slider');
+    // For Editing Category
+    Route::get('admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.edit.slider');
 });

@@ -22,14 +22,14 @@
                             <div class="form-group">
                                 <label for="category_name" class="col-md-4 control-label">Category Name</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="category_name" class="form-control input-md" placeholder="Category Name" wire:model="name" wire:keyup='generateSlug'>
+                                    <input type="text" id="category_name" name="category_name" class="form-control input-md" placeholder="Category Name" wire:model="name" wire:keyup='generateSlug'>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="category_slug" class="col-md-4 control-label">Category Slug</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="category_slug" class="form-control input-md" placeholder="Category Slug" wire:model="slug">
+                                    <input type="text" id="category_slug" name="category_slug" class="form-control input-md" placeholder="Category Slug" wire:model="slug">
                                 </div>
                             </div>
 
@@ -38,8 +38,8 @@
                                 <div class="col-md-4">
                                     <select name="status" id="status" class="form-control input-md" wire:model="status">
                                         <option value="" disabled selected>Select Status</option>
-                                        <option value="1" disabled selected>Active</option>
-                                        <option value="0" disabled selected>In Active</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">In Active</option>
                                     </select>
                                 </div>
                             </div>

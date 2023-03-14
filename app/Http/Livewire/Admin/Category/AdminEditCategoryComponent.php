@@ -23,13 +23,13 @@ class AdminEditCategoryComponent extends Component
 
     public function render()
     {
-        return view('livewire.admin.admin-edit-category-component')->layout('layouts.base');
+        return view('livewire.admin.category.admin-edit-category-component')->layout('layouts.base');
     }
 
     // For Generating Slug
     public function generateSlug()
     {
-        $this->slug = Str::slug($this->name);
+        $this->slug = Str::slug($this->name,'-');
     }
 
     // For Updating Category

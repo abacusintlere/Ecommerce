@@ -23,6 +23,9 @@
                         </div>
                     </div>
                     <div class="panel-body">
+                        @if (Session::has('success_message'))
+                            <div class="alert alert-success" role="alert">{{ Session::get('success_message') }}</div>
+                        @endif
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -40,6 +43,7 @@
                                         <td>{{ $category->slug }}</td>
                                         <td>
                                             <a href="{{ route('admin.edit.category', $category->slug) }}" ><i class="fa fa-edit fa-2x"></i></a>
+                                            <a href="#" wire:click.prevent="delete({{ $category->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
