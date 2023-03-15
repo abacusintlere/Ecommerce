@@ -44,10 +44,45 @@ class AdminEditProductComponent extends Component
         $categories = Category::where('is_active', 1)->get();
         return view('livewire.admin.product.admin-edit-product-component', compact('categories'))->layout('layouts.base');
     }
+    
+    // Updated Hook
+    public function updated($fields)
+    {
+        $this->validateOnly($fields,[
+            'name' => 'required',
+            'slug' => 'required',
+            'short_desc' => 'required',
+            'desc' => 'required',
+            'regular_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
+            'sku' => 'required',
+            'stock_status' => 'required',
+            'featured' => 'required',
+            'quantity' => 'required|numeric',
+            'thumbnail' => 'required|mimes:png,jpg',
+            'category_id' => 'required',
+            'is_active' => 'required',
+        ]);
+    }
 
     // Updating Products
     public function update()
     {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required',
+            'short_desc' => 'required',
+            'desc' => 'required',
+            'regular_price' => 'required|numeric',
+            'sale_price' => 'required|numeric',
+            'sku' => 'required',
+            'stock_status' => 'required',
+            'featured' => 'required',
+            'quantity' => 'required|numeric',
+            'thumbnail' => 'required|mimes:png,jpg',
+            'category_id' => 'required',
+            'is_active' => 'required',
+        ]);
         $product = Product::find($this->product_id);
         $product->name = $this->name;
         $product->slug = $this->slug;

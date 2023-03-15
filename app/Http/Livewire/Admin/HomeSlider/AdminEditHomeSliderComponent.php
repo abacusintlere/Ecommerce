@@ -26,6 +26,18 @@ class AdminEditHomeSliderComponent extends Component
         $this->status = $slider->status;
     }
 
+    // Updated Hook
+    public function updated($fields)
+    {
+        $this->validateOnly($fields,[
+            'title' => 'required',
+            'subtitle' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:png,jpg',
+            'link' => 'required',
+            'status' => 'required'
+        ]);
+    }
     public function render()
     {
         return view('livewire.admin.home-slider.admin-edit-home-slider-component')->layout('layouts.base');
@@ -35,6 +47,15 @@ class AdminEditHomeSliderComponent extends Component
 
     public function update()
     {
+        $this->validate([
+            'title' => 'required',
+            'subtitle' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:png,jpg',
+            'link' => 'required',
+            'status' => 'required'
+        ]);
+
         $slider = HomeSlider::find($this->slider_id);
         $slider->title = $this->title;
         $slider->subtitle = $this->subtitle;

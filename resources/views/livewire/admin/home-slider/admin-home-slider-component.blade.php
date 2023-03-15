@@ -55,7 +55,7 @@
                                         <td>{{ $slider->created_at }}</td>
                                         <td>
                                             <a href="{{ route('admin.edit.slider', $slider->id) }}" ><i class="fa fa-edit fa-2x"></i></a>
-                                            <a href="#" wire:click.prevent="delete({{ $slider->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>
+                                            <a href="#" onclick="confirm('Are You Sure To Delete Home Slider?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $slider->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach

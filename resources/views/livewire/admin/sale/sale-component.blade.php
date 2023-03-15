@@ -5,7 +5,7 @@
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel heading">
-                        Manage Home Categories
+                        Manage Sale Settings
                     </div>
                     <div class="panel panel-body">
                         @if (Session::has('success_message'))
@@ -14,26 +14,23 @@
                         <form class="form-horizontal" wire:submit.prevent='update'>
 
                             <div class="form-group">
-                                <label for="status" class="col-md-4 control-label">Choose Categories</label>
+                                <label for="status" class="col-md-4 control-label">Select Sale Date</label>
                                 <div class="col-md-4">
-                                    <select name="sel_categories[]" id="sel_categories" class="form-control sel-categories" wire:model="sel_categories">
-                                        <option value="" disabled selected>Select Category</option>
-                                        @forelse ($categories as $category)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                        @empty
-                                            <option value="">No Category Found</option>
-                                        @endforelse
-                                    </select>
-                                    @error('sel_categories') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <input type="text" id="sale-date" class="form-control input-md" placeholder="YYYY/MM/DD H:M:S" wire:model="sale_date">
+                                    @error('sale_date') <span class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="nos_products" class="col-md-4 control-label">No of Products</label>
+                                <label for="status" class="col-md-4 control-label">Sale Status</label>
                                 <div class="col-md-4">
-                                    <input type="text" id="nos_products" name="nos_products" class="form-control input-md" placeholder="No of Products" wire:model="no_of_products">
-                                    @error('no_of_products') <span class="text-danger">{{ $message }}</span> @enderror
+                                    <select name="status" id="status" class="form-control input-md" wire:model="status">
+                                        <option value="" disabled selected>Select Status</option>
+                                        <option value="1">Active</option>
+                                        <option value="0">In Active</option>
+                                    </select>
+                                    @error('status') <span class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
                             </div>
@@ -56,7 +53,13 @@
 @push('scripts')
     <script>
         $(document).ready(function(){
-            $('.sel-categories').select2();
+            $('#sale-date').datetimepicker({
+                format : "Y-MM-DD h:m:s",
+            })
+            .on('dp.change', function(ev){
+                var data = $('#sale-date').val();
+                @this.set('sale_date', data);
+            });
             // On Home Category Change
             $('.sel-categories').on('change', function(e){
                 data = $('.sel-categories').select2('val');

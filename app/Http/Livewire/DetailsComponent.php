@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Sale;
 use App\Models\Product;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
@@ -20,7 +21,8 @@ class DetailsComponent extends Component
         $product = Product::where('slug', $this->slug)->first();
         $papular_products = Product::inRandomOrder()->limit(4)->get();
         $related_products = Product::where('category_id', $product->category_id)->inRandomOrder()->limit(5)->get();
-        return view('livewire.details-component', compact('product', 'papular_products','related_products'))->layout('layouts.base');
+        $sale = Sale::find(1);
+        return view('livewire.details-component', compact('product', 'papular_products','related_products','sale'))->layout('layouts.base');
     }
 
     // For Storing Product Into Cart

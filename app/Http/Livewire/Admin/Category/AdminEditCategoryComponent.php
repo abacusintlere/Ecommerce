@@ -31,10 +31,26 @@ class AdminEditCategoryComponent extends Component
     {
         $this->slug = Str::slug($this->name,'-');
     }
+    
+    // Updated Hook
+    public function updated($fields)
+    {
+        $this->validateOnly($fields,[
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug',
+            'is_active' => 'required'
+        ]);
+    }
 
     // For Updating Category
     public function update()
     {
+        $this->validate([
+            'name' => 'required',
+            'slug' => 'required|unique:categories,slug',
+            'is_active' => 'required'
+        ]);
+        
         $category = Category::find($this->category_id);
         $category->name = $this->name;
         $category->slug = $this->slug;

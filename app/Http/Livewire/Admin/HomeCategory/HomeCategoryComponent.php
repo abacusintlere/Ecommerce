@@ -8,16 +8,24 @@ use Livewire\Component;
 
 class HomeCategoryComponent extends Component
 {
-    public $selected_categories=[], $no_of_products, $category_id;
+    public $sel_categories=[], $no_of_products, $category_id;
 
     // Mount Function
     public function mount()
     {
         $category = HomeCategory::first();
         $this->category_id = $category->id;
-        $this->selected_categories = explode(',', $category->sel_categories);
+        $this->sel_categories = explode(',', $category->sel_categories);
         $this->no_of_products = $category->no_of_products;
 
+    }
+    // Updated Hook 
+    public function updated($fields)
+    {
+        $this->validateOnly($fields, [
+            'sel_categories' => 'required',
+            'no_of_products' => 'required|numeric'
+        ]);
     }
 
     public function render()
@@ -29,8 +37,12 @@ class HomeCategoryComponent extends Component
     // Function For Update
     public function update()
     {
+        $this->validate([
+            'sel_categories' => 'required',
+            'no_of_products' => 'required|numeric'
+        ]);
         $category = HomeCategory::find($this->category_id);
-        $category->sel_categories = implode(',', $this->selected_categories);
+        $category->sel_categories = implode(',', $this->sel_categories);
         $category->no_of_products = $this->no_of_products;
         $category->update();
 

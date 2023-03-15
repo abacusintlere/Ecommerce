@@ -16,8 +16,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
+	<link rel="stylesheet" href="{{ asset('assets/css/bootstrap-datetimepicker.min.css') }}">
 	{{-- Custome CSS --}}
-	@stack('style')
+	@stack('styles')
 	{{-- Livewire CSS --}}
 	@livewireStyles
 </head>
@@ -50,7 +51,11 @@
 	<script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
 	<script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
 	<script src="{{ asset('assets/js/functions.js') }}"></script>
-	<script src="{{ asset('assets/js/select2.min.js') }}"
+	<script src="{{ asset('assets/js/select2.min.js') }}"></script>
+	<script src="{{ asset('assets/js/bootstrap-datetimepicker.min.js') }}"></script>
+	<script src="{{ asset('assets/js/moment.min.js') }}"></script>
+	{{-- TinyMCE --}}
+	<script src="{{ asset('assets/js/tinymce.min.js') }}"></script>
 	{{-- Custome Scripts --}}
 	@stack('scripts')
 	{{-- Livewire Scripts --}}

@@ -17,9 +17,31 @@ class AdminAddHomeSliderComponent extends Component
         return view('livewire.admin.home-slider.admin-add-home-slider-component')->layout('layouts.base');
     }
 
+    // Updated Hook
+    public function updated($fields)
+    {
+        $this->validateOnly($fields,[
+            'title' => 'required',
+            'subtitle' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:png,jpg',
+            'link' => 'required',
+            'status' => 'required'
+        ]);
+    }
+
     // For Storing Slider
     public function store()
     {
+        $this->validate([
+            'title' => 'required',
+            'subtitle' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'required|mimes:png,jpg',
+            'link' => 'required',
+            'status' => 'required'
+        ]);
+
         $slider = new HomeSlider();
         $slider->title = $this->title;
         $slider->subtitle = $this->subtitle;

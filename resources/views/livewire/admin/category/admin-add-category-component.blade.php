@@ -23,6 +23,7 @@
                                 <label for="category_name" class="col-md-4 control-label">Category Name</label>
                                 <div class="col-md-4">
                                     <input type="text" id="category_name" name="category_name" class="form-control input-md" placeholder="Category Name" wire:model="name" wire:keyup='generateSlug'>
+                                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
@@ -30,17 +31,19 @@
                                 <label for="category_slug" class="col-md-4 control-label">Category Slug</label>
                                 <div class="col-md-4">
                                     <input type="text" id="category_slug" name="category_slug" class="form-control input-md" placeholder="Category Slug" wire:model="slug">
+                                    @error('slug') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <label for="status" class="col-md-4 control-label">Category Status</label>
+                                <label for="is_active" class="col-md-4 control-label">Category Status</label>
                                 <div class="col-md-4">
-                                    <select name="status" id="status" class="form-control input-md" wire:model="status">
+                                    <select name="is_active" id="is_active" class="form-control input-md" wire:model="is_active">
                                         <option value="" disabled selected>Select Status</option>
                                         <option value="1">Active</option>
                                         <option value="0">In Active</option>
                                     </select>
+                                    @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
 

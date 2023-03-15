@@ -23,6 +23,8 @@
                                 <label for="title" class="col-md-4 control-label">Title</label>
                                 <div class="col-md-4">
                                     <input type="text" id="title" name="title" class="form-control input-md" placeholder="Title" wire:model="title">
+                                    @error('title') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -30,6 +32,8 @@
                                 <label for="subtitle" class="col-md-4 control-label">Subtitle</label>
                                 <div class="col-md-4">
                                     <input type="text" id="subtitle" name="subtitle" class="form-control input-md" placeholder="Subtitle" wire:model="subtitle">
+                                    @error('subtitle') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -37,6 +41,8 @@
                                 <label for="price" class="col-md-4 control-label">Price</label>
                                 <div class="col-md-4">
                                     <input type="text" id="price" name="price" class="form-control input-md" placeholder="Price" wire:model="price">
+                                    @error('price') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -44,6 +50,8 @@
                                 <label for="link" class="col-md-4 control-label">Link</label>
                                 <div class="col-md-4">
                                     <input type="text" id="link" name="link" class="form-control input-md" placeholder="Link" wire:model="link">
+                                    @error('link') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -54,6 +62,8 @@
                                     @if($image)
                                         <img src="{{ $image->temporaryUrl() }}" alt="" width="220" height="220">
                                     @endif
+                                    @error('image') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -65,6 +75,8 @@
                                         <option value="1">Active</option>
                                         <option value="0">In Active</option>
                                     </select>
+                                    @error('status') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 

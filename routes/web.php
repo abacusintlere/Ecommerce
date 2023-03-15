@@ -13,6 +13,7 @@ use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
+use App\Http\Livewire\Admin\Sale\SaleComponent;
 use App\Http\Livewire\TermsConditionsComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
@@ -115,4 +116,7 @@ Route::middleware([
 
     ################################## Home Page Categories ########################################
     Route::get('admin/home/categories', HomeCategoryComponent::class)->name('admin.home.categories');
+
+    ################################## Sale Settings ###############################################
+    Route::get('admin/sale/settings', SaleComponent::class)->name('admin.sale.settings');
 });

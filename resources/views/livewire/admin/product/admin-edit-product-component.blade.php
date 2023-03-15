@@ -23,6 +23,8 @@
                                 <label for="product_name" class="col-md-4 control-label">Product Name</label>
                                 <div class="col-md-4">
                                     <input type="text" id="product_name" name="product_name" class="form-control input-md" placeholder="Category Name" wire:model="name" wire:keyup='generateSlug'>
+                                    @error('name') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -30,6 +32,8 @@
                                 <label for="product_slug" class="col-md-4 control-label">Product Slug</label>
                                 <div class="col-md-4">
                                     <input type="text" id="product_slug" name="product_slug" class="form-control input-md" placeholder="Product Slug" wire:model="slug">
+                                    @error('slug') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -37,6 +41,8 @@
                                 <label for="short_desc" class="col-md-4 control-label">Short Description</label>
                                 <div class="col-md-4">
                                     <textarea type="text" id="short_desc" name="short_desc" class="form-control" placeholder="Product Slug" wire:model="short_desc"> </textarea>
+                                    @error('short_desc') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -45,6 +51,8 @@
                                 <label for="desc" class="col-md-4 control-label">Description</label>
                                 <div class="col-md-4">
                                     <textarea type="text" id="desc" name="desc" class="form-control" placeholder="Product Slug" wire:model="desc"> </textarea>
+                                    @error('desc') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -52,6 +60,8 @@
                                 <label for="regular_price" class="col-md-4 control-label">Regular Price</label>
                                 <div class="col-md-4">
                                     <input type="number" id="regular_price" name="regular_price" class="form-control input-md" placeholder="Regular Price" wire:model="regular_price">
+                                    @error('regular_price') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -59,6 +69,8 @@
                                 <label for="sale_price" class="col-md-4 control-label">Sale Price</label>
                                 <div class="col-md-4">
                                     <input type="number" id="sale_price" name="sale_price" class="form-control input-md" placeholder="Sale Price" wire:model="sale_price">
+                                    @error('sale_price') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -66,6 +78,8 @@
                                 <label for="sku" class="col-md-4 control-label">Description</label>
                                 <div class="col-md-4">
                                     <input type="text" id="sku" name="sku" class="form-control input-md" placeholder="SKU" wire:model="sku">
+                                    @error('sku') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -77,6 +91,8 @@
                                         <option value="instock">In Stock</option>
                                         <option value="outofstock">Out Stock</option>
                                     </select>
+                                    @error('stock_status') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -88,6 +104,8 @@
                                         <option value="1">Yes</option>
                                         <option value="0">No</option>
                                     </select>
+                                    @error('featured') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -95,6 +113,8 @@
                                 <label for="quantity" class="col-md-4 control-label">Quantity</label>
                                 <div class="col-md-4">
                                     <input type="number" id="quantity" name="quantity" class="form-control input-md" placeholder="Quantity" wire:model="quantity">
+                                    @error('quantity') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -108,6 +128,8 @@
                                     @else
                                         <img src="{{ asset('assets/images/products/') }}{{ $thumbnail }}" alt="" srcset="">
                                     @endif
+                                    @error('thumbnail') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -120,6 +142,8 @@
                                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endforeach
                                     </select>
+                                    @error('category') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -131,6 +155,8 @@
                                         <option value="1">Active</option>
                                         <option value="0">In Active</option>
                                     </select>
+                                    @error('is_active') <span class="text-danger">{{ $message }}</span> @enderror
+
                                 </div>
                             </div>
 
@@ -148,3 +174,34 @@
         </div>
     </div>
 </div>
+
+{{-- TinyMCE --}}
+@push('scripts')
+    <script>
+        $(function(){
+            // For Short Description
+            tinymce.init({
+                selector: '#short_desc',
+                setup:function(editor){
+                    editor.on('change', function(e){
+                        tinyMCE.triggerSave();
+                        var short_desc = $('#short_desc').val();
+                        @this.set('short_desc', short_desc);
+                    });
+                }
+            });
+
+            // For Long Description
+            tinymce.init({
+                selector: '#desc',
+                setup:function(editor){
+                    editor.on('change', function(e){
+                        tinyMCE.triggerSave();
+                        var desc = $('#desc').val();
+                        @this.set('desc', desc);
+                    });
+                }
+            });
+        });
+    </script>
+@endpush

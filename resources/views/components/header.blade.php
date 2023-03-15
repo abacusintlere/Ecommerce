@@ -60,6 +60,9 @@
                                             <li class="menu-item" >
                                                 <a title="Manage Home Categories" href="{{ route('admin.home.categories') }}">Manage Home Categories</a>
                                             </li>
+                                            <li class="menu-item" >
+                                                <a title="Manage Home Categories" href="{{ route('admin.sale.settings') }}">Manage Sale Settings</a>
+                                            </li>
                                         @endif
                                         {{-- For User  --}}
                                         @if (Auth::role('Admin'))
@@ -100,26 +103,11 @@
                     @livewire('header-search-component')
 
                     <div class="wrap-icon right-section">
-                        <div class="wrap-icon-section wishlist">
-                            <a href="#" class="link-direction">
-                                <i class="fa fa-heart" aria-hidden="true"></i>
-                                <div class="left-info">
-                                    <span class="index">0 item</span>
-                                    <span class="title">Wishlist</span>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="wrap-icon-section minicart">
-                            <a href="#" class="link-direction">
-                                <i class="fa fa-shopping-basket" aria-hidden="true"></i>
-                                <div class="left-info">
-                                    @if (Cart::count() > 0)
-                                        <span class="index">4 items</span>
-                                    @endif
-                                    <span class="title">CART</span>
-                                </div>
-                            </a>
-                        </div>
+                        {{-- Wishlist Component --}}
+                        @livewire('wish-list-count-component')
+
+                        {{-- Cart Component --}}
+                        @livewire('cart-count-component')
                         <div class="wrap-icon-section show-up-after-1024">
                             <a href="#" class="mobile-navigation">
                                 <span></span>
