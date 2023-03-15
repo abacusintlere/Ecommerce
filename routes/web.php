@@ -21,8 +21,11 @@ use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
 use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
 use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
 use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
+use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminHomeSliderComponent;
+use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
+use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
 
@@ -108,4 +111,8 @@ Route::middleware([
     Route::get('admin/slider/add', AdminAddHomeSliderComponent::class)->name('admin.add.slider');
     // For Editing Category
     Route::get('admin/slider/edit/{slider_id}', AdminEditHomeSliderComponent::class)->name('admin.edit.slider');
+
+
+    ################################## Home Page Categories ########################################
+    Route::get('admin/home/categories', HomeCategoryComponent::class)->name('admin.home.categories');
 });

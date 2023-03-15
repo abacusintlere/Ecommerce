@@ -15,6 +15,9 @@
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/chosen.min.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/style.css') }}">
 	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/color-01.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('assets/css/select2.min.css') }}">
+	{{-- Custome CSS --}}
+	@stack('style')
 	{{-- Livewire CSS --}}
 	@livewireStyles
 </head>
@@ -47,6 +50,9 @@
 	<script src="{{ asset('assets/js/jquery.countdown.min.js') }}"></script>
 	<script src="{{ asset('assets/js/jquery.sticky.js') }}"></script>
 	<script src="{{ asset('assets/js/functions.js') }}"></script>
+	<script src="{{ asset('assets/js/select2.min.js') }}"
+	{{-- Custome Scripts --}}
+	@stack('scripts')
 	{{-- Livewire Scripts --}}
 	@livewireScripts
 </body>

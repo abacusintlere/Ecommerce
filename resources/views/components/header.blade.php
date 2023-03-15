@@ -49,13 +49,16 @@
                                                 <a title="Admin Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                             </li>
                                             <li class="menu-item" >
-                                                <a title="Admin Categories" href="{{ route('admin.categories') }}">Categories</a>
+                                                <a title="Categories" href="{{ route('admin.categories') }}">Categories</a>
                                             </li>
                                             <li class="menu-item" >
-                                                <a title="Admin Categories" href="{{ route('admin.products') }}">All Products</a>
+                                                <a title="All Products" href="{{ route('admin.products') }}">All Products</a>
                                             </li>
                                             <li class="menu-item" >
-                                                <a title="Admin Categories" href="{{ route('admin.sliders') }}">Manage Home Sliders</a>
+                                                <a title="Manage Home Sliders" href="{{ route('admin.sliders') }}">Manage Home Sliders</a>
+                                            </li>
+                                            <li class="menu-item" >
+                                                <a title="Manage Home Categories" href="{{ route('admin.home.categories') }}">Manage Home Categories</a>
                                             </li>
                                         @endif
                                         {{-- For User  --}}
