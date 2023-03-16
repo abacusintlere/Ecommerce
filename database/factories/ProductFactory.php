@@ -18,16 +18,16 @@ class ProductFactory extends Factory
     {
         return [
             //
-            'name' => $this->faker->unique()->words($nb =3, $asText=true),
-            'short_desc' => $this->faker->text(200),
+            'name' => $this->faker->unique()->words($nb =2, $asText=true),
+            'short_desc' => $this->faker->text(20),
             'description' => $this->faker->text(500),
-            'regular_price' => $this->faker->numberBetween(250, 1000),
-            'sale_price' => $this->faker->numberBetween(250, 1000),
-            'sku' => 'DIGI' . $this->faker->unique()->numberBetween(1000,5000),
+            'regular_price' => $this->faker->numberBetween(250, 100),
+            'sale_price' => $this->faker->numberBetween(250, 100),
+            'sku' => 'DIGI' . $this->faker->numberBetween(100,500),
             'stock_status' => 'instock',
             'quantity' => $this->faker->numberBetween(100, 500),
-            'thumbnail' => 'digital_' . $this->faker->unique()->numberBetween(1,22) . 'jpg',
-            'category_id' => $this->faker->randomNumber(1,10)
+            'thumbnail' => 'digital_' . $this->faker->numberBetween(1,22) . '.jpg',
+            'category_id' => 1
         ];
     }
 }

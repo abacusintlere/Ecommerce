@@ -43,7 +43,7 @@
                     <div class="product product-style-2 equal-elem ">
                         <div class="product-thumnail">
                             <a href="detail.html" title="{{ $product->name }}">
-                                <figure><img src="{{ asset('assets/images/products/') }}{{ $product->thumbnail }}" width="800" height="800" alt="{{ $product->name }}"></figure>
+                                <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" width="800" height="800" alt="{{ $product->name }}"></figure>
                             </a>
                             <div class="group-flash">
                                 <span class="flash-item sale-label">sale</span>
@@ -122,17 +122,19 @@
                 </div>
                 <div class="tab-contents">
                     @foreach ($categories as $key=>$category)
+
                         <div class="tab-content-item {{ $key ==0? 'active' : '' }}" id="category_{{ $category->id }}">
                             <div class="wrap-products slide-carousel owl-carousel style-nav-1 equal-container" data-items="5" data-loop="false" data-nav="true" data-dots="false" data-responsive='{"0":{"items":"1"},"480":{"items":"2"},"768":{"items":"3"},"992":{"items":"4"},"1200":{"items":"5"}}' >
                                     @php
-                                        $c_products = $category->products()->take($no_of_products)
+                                        $c_products = App\Models\Product::where('category_id', $category->id)->take(10)->get();
                                     @endphp
 
                                     @foreach ($c_products as $product)
+                                    {{ $product }}
                                         <div class="product product-style-2 equal-elem ">
                                             <div class="product-thumnail">
                                                 <a href="{{ route("product.details", $product->slug) }}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                                    <figure><img src="{{ asset('assets/images/products/') }}{{ $product->thumbnail }}" width="800" height="800" alt="{{ $product->title }}"></figure>
+                                                    <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" width="800" height="800" alt="{{ $product->title }}"></figure>
                                                 </a>
                                                 <div class="group-flash">
                                                     <span class="flash-item new-label">new</span>

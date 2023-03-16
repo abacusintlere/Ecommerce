@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,9 +23,9 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-
-        User::factory(15)->create();
-        Category::factory(10)->create();
+        // $role = Role::create(['name' => 'User']);
+        // User::factory(15)->create();
+        // Category::factory(10)->create();
         Product::factory(100)->create();
     }
 }

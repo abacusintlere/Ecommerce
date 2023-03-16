@@ -27,7 +27,7 @@ class Product extends Model
         'is_active'
     ];
 
-    public function getNameAttribute($value)
+    public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);

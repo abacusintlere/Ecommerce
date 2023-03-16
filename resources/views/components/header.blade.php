@@ -44,7 +44,7 @@
                                     <a title="My Account" href="#">My Account ({{ Auth::user()->name }})<i class="fa fa-angle-down" aria-hidden="true"></i></a>
                                     <ul class="submenu curency" >
                                         {{-- For Admin --}}
-                                        @if (Auth::role('Admin'))
+                                        @role('Admin')
                                             <li class="menu-item" >
                                                 <a title="Admin Dashboard" href="{{ route('admin.dashboard') }}">Dashboard</a>
                                             </li>
@@ -63,21 +63,21 @@
                                             <li class="menu-item" >
                                                 <a title="Manage Home Categories" href="{{ route('admin.sale.settings') }}">Manage Sale Settings</a>
                                             </li>
-                                        @endif
+                                        @endrole
                                         {{-- For User  --}}
-                                        @if (Auth::role('Admin'))
+                                        @role('User')
                                             <li class="menu-item" >
                                                 <a title="User Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
                                             </li>
-                                        @endif
+                                        @endrole
                                         <li class="menu-item" >
                                             <a title="Pound (GBP)" href="#">Profile</a>
                                         </li>
-                                        <form action="{{ route('logout')}}" method="post">
+                                        <form action="{{ route('logout')}}" method="post" id="logout">
                                             @method('post')
                                             @csrf
                                             <li class="menu-item" >
-                                                <a title="Pound (GBP)" onclick="event.preventDefault(); .closest('form').submit();" href="#">Logout</a>
+                                                <a title="Pound (GBP)" onclick="event.preventDefault(); document.getElementById('logout').submit();" href="#">Logout</a>
                                             </li>
                                         </form>
 

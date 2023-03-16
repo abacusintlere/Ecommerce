@@ -19,13 +19,13 @@ return new class extends Migration
             $table->text('description');
             $table->decimal('regular_price');
             $table->decimal('sale_price')->nullable();
-            $table->string('sku')->unique();
+            $table->string('sku');
             $table->enum('stock_status', ['instock', 'outofstock']);
             $table->boolean('featured')->default(false);
             $table->unsignedInteger('quantity')->default(0);
             $table->string('thumbnail')->nullable();
             $table->text('images')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete()->onUpdate();
+            $table->foreignId('category_id')->constrained('products');
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Attribute;
 use Illuminate\Support\Str;
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -30,9 +31,10 @@ class Category extends Model
     }
 
 
-    public function getNameAttribute($value)
+    public function setNameAttribute($value)
     {
         $this->attributes['name'] = strtolower($value);
         $this->attributes['slug'] = Str::slug($value);
     }
+
 }
