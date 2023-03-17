@@ -29,6 +29,7 @@ use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
+use App\Http\Livewire\WishlistComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,8 @@ Route::get('products-category/{category_slug}', CategoryComponent::class)->name(
 Route::get('product/search', SearchComponent::class)->name('product.search');
 // Cart Component
 Route::get('cart', CartComponent::class)->name('cart');
+// Wishlist Component
+Route::get('wishlist', WishlistComponent::class)->name('wishlist');
 // Check Out Component
 Route::get('checkout', CheckoutComponent::class)->name('checkout');
 // Thank You Route Component
