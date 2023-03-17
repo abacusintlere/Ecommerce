@@ -51,9 +51,10 @@ class ShopComponent extends Component
     // For Storing Product Into Cart
     public function addToCart($product_id, $product_name, $product_price)
     {
+        // dd($product_id, $product_name, $product_price);
         // You can even make it a one-liner
-        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('Product');
-        $this->emit('cart-count-component', 'refreshComponent');
+        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('cart-count-component', 'refreshComponent');
         session()->flash("success_message", "Product Added To Cart Successfully!");
         return redirect()->route('cart');
     }
@@ -62,9 +63,24 @@ class ShopComponent extends Component
     public function addToWishList($product_id, $product_name, $product_price)
     {
         // You can even make it a one-liner
-        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('Product');
-        $this->emit('wish-list-count-component', 'refreshComponent');
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('wish-list-count-component', 'refreshComponent');
         session()->flash("success_message", "Product Added To Wishlist Successfully!");
-        return redirect()->route('cart');
+        // return redirect()->route('cart');
+    }
+
+    // Removing Product From Wishlist
+    public function removeWishList($productId)
+    {
+        foreach(Cart::instance('wishlist')->content() as $witem)
+        {
+            if($witem->id == $productId)
+            {
+                Cart::instance('wishlist')->remove($witem->rowId);
+                $this->emitTo('wish-list-count-component', 'refreshComponent');
+                session()->flash('success_message', "Product Deleted From Wishlist");
+            }
+        }
+       
     }
 }

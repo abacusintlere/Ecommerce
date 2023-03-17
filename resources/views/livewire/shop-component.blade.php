@@ -86,18 +86,18 @@
                             <div class="product product-style-3 equal-elem ">
                                 <div class="product-thumnail">
                                     <a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                        <figure><img src="{{ asset('assets/images/products/') }} {{ $product->thumbnail }}" alt="{{ $product->name }}"></figure>
+                                        <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}"></figure>
                                     </a>
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{ $product->name }}</span></a>
                                     <div class="wrap-price"><span class="product-price">{{ $product->regular_price }}</span></div>
-                                    <a href="#"class="btn add-to-cart" wire:click.prevent="addToCart({{ $product->id}}, {{ $product->name }}, {{ $product->regular_price }})">Add To Cart</a>
+                                    <a href="#"class="btn add-to-cart" wire:click.prevent="addToCart({{ $product->id }}, '{{ $product->name }}' , {{ $product->regular_price }})">Add To Cart</a>
                                     <div class="product-wish">
                                         @if($wishlist->contains($product->id))
-                                            <a href="#"><i class="fa fa-heart fill-heart"></i></a>
+                                            <a href="#" wire:click.prevent="removeWishList({{ $product->id }})"><i class="fa fa-heart fill-heart"></i></a>
                                         @else
-                                            <a href="#" wire:click.prevent="addToWishList({{ $product->id}}, {{ $product->name }}, {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
+                                            <a href="#" wire:click.prevent="addToWishList({{ $product->id}}, '{{ $product->name }}', {{ $product->regular_price }})"><i class="fa fa-heart"></i></a>
                                         @endif
                                     </div>
                                 </div>
@@ -125,10 +125,10 @@
                 <h2 class="widget-title">All Categories</h2>
                 <div class="widget-content">
                     <ul class="list-category">
-                        @foreach ($categories as $category)
+                        {{-- @foreach ($categories as $category)
                         <li class="category-item has-child-cate">
                             <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ $category->name }}</a>
-                            @if ($category->sub_categories)
+                            @if (!empty($category->sub_categories))
                                 <span class="toggle-control">+</span>
                                 <ul class="sub-cate">
                                     @foreach ($sub_categories as $sub_category)
@@ -137,7 +137,7 @@
                                 </ul>
                             @endif
                         </li>
-                        @endforeach
+                        @endforeach --}}
 
                         {{-- <li class="category-item">
                             <a href="#" class="cate-link">Tools & Equipments</a>
@@ -168,7 +168,7 @@
             <div class="widget mercado-widget filter-widget price-filter">
                 <h2 class="widget-title">Price: <span class="text-info">${{ $min_price }} - ${{ $max_price }}</span></h2>
                 <div class="widget-content">
-                    <div id="slider-range" wire:ignore></div>
+                    <div id="slider" wire:ignore></div>
                 </div>
             </div><!-- Price-->
 
@@ -210,7 +210,7 @@
                             <div class="product product-widget-style">
                                 <div class="thumbnnail">
                                     <a href="detail.html" title="{{ $product->name }}">
-                                        <figure><img src="{{ asset('assets/images/products/') }} {{ $product->thumbnail }}" alt="{{ $product->name }}" alt="{{ $product->name }}"></figure>
+                                        <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}" alt="{{ $product->name }}"></figure>
                                     </a>
                                 </div>
                                 <div class="product-info">
@@ -234,12 +234,12 @@
 
 @push('scripts')
     <script>
-        var slider = document.getElementById('slider-range');
+        var slider = document.getElementById('slider');
         noUiSlider.create(slider, {
             start : [1,1000],
             connect: true,
             range:{
-                'min':1;
+                'min':1,
                 'max':1000
             },
             // Show a scale with the slider
@@ -250,8 +250,9 @@
             }
         });
         slider.noUiSlider.on('update', function(value){
+            // console.log(value[0]);
             @this.set('min_price', value[0]);
-            @this.set('max_price', value[1])
+            @this.set('max_price', value[1]);
         });
     </script>
 @endpush

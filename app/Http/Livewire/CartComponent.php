@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Product;
 use Livewire\Component;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -10,7 +11,8 @@ class CartComponent extends Component
 
     public function render()
     {
-        return view('livewire.cart-component')->layout('layouts.base');
+        $products = Product::where('is_active', 1)->take(8)->get();
+        return view('livewire.cart-component', compact('products'))->layout('layouts.base');
     }
     // For Increasing Quantity Into Cart
     public function increaseQuantity($rowId)
@@ -18,7 +20,7 @@ class CartComponent extends Component
         $product = Cart::instance('cart')->get($rowId);
         $qty = $product->qty+1;
         Cart::update($rowId, $qty);
-        $this->emit('cart-count-component', 'refreshComponent');
+        $this->emitTo('cart-count-component', 'refreshComponent');
 
     }
 
@@ -28,7 +30,7 @@ class CartComponent extends Component
         $product = Cart::instance('cart')->get($rowId);
         $qty = $product->qty-1;
         Cart::update($rowId, $qty);
-        $this->emit('cart-count-component', 'refreshComponent');
+        $this->emitTo('cart-count-component', 'refreshComponent');
 
     }
 
@@ -36,7 +38,7 @@ class CartComponent extends Component
     public function remove($rowId)
     {
         Cart::instance('cart')->remove($rowId);
-        $this->emit('cart-count-component', 'refreshComponent');
+        $this->emitTo('cart-count-component', 'refreshComponent');
         session()->flash('success_message', "Product Deleted From Cart");
     }
 
@@ -44,7 +46,7 @@ class CartComponent extends Component
     public function removeAll()
     {
         Cart::instance('cart')->destroy();
-        $this->emit('cart-count-component', 'refreshComponent');
+        $this->emitTo('cart-count-component', 'refreshComponent');
         session()->flash('success_message', "Shopping Cart Cleared Successfully!");
 
     }
