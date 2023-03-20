@@ -251,8 +251,8 @@
         });
         slider.noUiSlider.on('update', function(value){
             // console.log(value[0]);
-            @this.set('min_price', value[0]);
-            @this.set('max_price', value[1]);
+            @this.set("min_price", value[0]);
+            @this.set("max_price", value[1]);
         });
     </script>
 @endpush

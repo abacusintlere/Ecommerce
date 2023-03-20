@@ -9,11 +9,12 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {
-    public $slug;
+    public $slug, $qty;
 
     public function mount($slug)
     {
         $this->slug = $slug;
+        $this->qty = 1;
     }
 
     public function render()
@@ -32,5 +33,25 @@ class DetailsComponent extends Component
         Cart::add($product_id, $product_name, 1, $product_price)->associate('Product');
         session()->flash("success_message", "Product Added To Cart");
         return redirect()->route('cart');
+    }
+
+    // For Increasing Quantity Into Cart
+    public function increaseQuantity($rowId)
+    {
+        $product = Cart::instance('cart')->get($rowId);
+        $qty = $product->qty+1;
+        Cart::update($rowId, $qty);
+        $this->emitTo('cart-count-component', 'refreshComponent');
+
+    }
+
+    // For Decreasing Quantity Into Cart
+    public function decreaseQuantity($rowId)
+    {
+        $product = Cart::instance('cart')->get($rowId);
+        $qty = $product->qty-1;
+        Cart::update($rowId, $qty);
+        $this->emitTo('cart-count-component', 'refreshComponent');
+
     }
 }

@@ -36,6 +36,7 @@
                 <ul class="product-list grid-products equal-container">
                     @php
                         $wishlists = Cart::instance('wishlist')->content();
+                        $wishedlist = Cart::instance('wishlist')->content()->pluck('id');
                     @endphp
                     @forelse ($wishlists as $wishlist)
                         <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
@@ -47,14 +48,14 @@
                                 </div>
                                 <div class="product-info">
                                     <a href="{{ route('product.details', $wishlist->model->slug) }}" class="product-name"><span>{{ $wishlist->name }}</span></a>
-                                    <div class="wrap-price"><span class="product-price">{{ $wishlist->regular_price }}</span></div>
-                                    <a href="{{ route('product.details', $wishlist->model->slug) }}"class="btn add-to-cart" wire:click.prevent="addToCart({{ $wishlist->model->id }}, '{{ $wishlist->name }}' , {{ $wishlist->regular_price }})">Add To Cart</a>
+                                    <div class="wrap-price"><span class="product-price">{{ $wishlist->model->regular_price }}</span></div>
+                                    <a href="{{ route('product.details', $wishlist->model->slug) }}"class="btn add-to-cart" wire:click.prevent="moveProductToWishlist('{{ $wishlist->rowId }}')">Move To Cart</a>
                                     <div class="product-wish">
-                                        {{-- @if($wishlist->contains($product->id))
+                                        @if($wishedlist->contains($wishlist->model->id))
                                             <a href="#" wire:click.prevent="removeWishList({{ $wishlist->model->id }})"><i class="fa fa-heart fill-heart"></i></a>
-                                        @else --}}
-                                            <a href="#" wire:click.prevent="addToWishList({{ $wishlist->model->id}}, '{{ $wishlist->name }}', {{ $wishlist->regular_price }})"><i class="fa fa-heart"></i></a>
-                                        {{-- @endif --}}
+                                        {{-- @else --}}
+                                            {{-- <a href="#" wire:click.prevent="addToWishList({{ $wishlist->model->id}}, '{{ $wishlist->name }}', {{ $wishlist->regular_price }})"><i class="fa fa-heart"></i></a> --}}
+                                        @endif
                                     </div>
                                 </div>
                             </div>

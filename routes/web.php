@@ -70,7 +70,7 @@ Route::get('terms-conditions', TermsConditionsComponent::class)->name('terms.con
 Route::get('return-policy', ReturnPolicyComponent::class)->name('return.policy');
 // Privacy and Policy Component
 Route::get('privacy-policy', PrivacyPolicyComponent::class)->name('privacy.policy');
-
+// Move Product From Wishlist To Cart
 
 
 
