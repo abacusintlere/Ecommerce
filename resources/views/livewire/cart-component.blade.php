@@ -34,6 +34,7 @@
                                 <a class="btn btn-increase" href="#" wire:click.prevent="increaseQuantity('{{ $item->rowId }}')"></a>
                                 <a class="btn btn-reduce" href="#" wire:click.prevent="decreaseQuantity('{{ $item->rowId }}')"></a>
                             </div>
+                            <p class="text-center"><a href="#" wire:click.prevent="saveForLater('{{ $item->rowId }}')">Save For Later</a></p>
                         </div>
                         <div class="price-field sub-total">
                             <p class="price">${{ $item->subtotal() }}</p>
@@ -75,6 +76,45 @@
             </div>
         </div>
 
+        {{-- Save For Later --}}
+        <div class="wrap-iten-in-cart">
+            <h2 class="title-box" style="border-bottom: 1px solid; padding-bottom: 15px;">{{ Cart::instance('saveForLater')->count() }} Item(s) Saved For Later</h2>
+            @if (Session::has('success_message'))
+                <div class="alert alert-success">
+                    <strong>Success</strong>{{ Session::get('s_success_message') }}
+                </div>
+            @endif
+            @if (Cart::instance('saveForLater')->count() > 0)
+            <h3 class="box-title">Products Name</h3>
+            <ul class="products-cart">
+                @foreach (Cart::instance('saveForLater')->content() as $item)
+                    <li class="pr-cart-item">
+                        <div class="product-image">
+                            <figure><img src="assets/images/products/{{ $item->model->thumbnail }}" alt="{{ $item->model->name }}"></figure>
+                        </div>
+                        <div class="product-name">
+                            <a class="link-to-product" href="{{ route('product.details', $item->model->slug) }}">{{ $item->model->name }}</a>
+                        </div>
+                        <div class="price-field produtc-price">
+                            <p class="price">${{ $item->model->regular_price }}</p>
+                        </div>
+                        <div class="quantity">
+                            <p class="text-center"><a href="#" wire:click.prevent="moveToCart('{{ $item->rowId }}')">Move To Cart</a></p>
+                        </div>
+                        <div class="delete">
+                            <a href="#" class="btn btn-delete" title="Delete Product" wire:click.prevent="deleteFromSavedLater('{{ $item->rowId }}')">
+                                <span>Delete from your Saved Later</span>
+                                <i class="fa fa-times-circle" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </li>             
+                @endforeach
+            </ul>
+            @else
+                <p class="text-center">No Product Added Into Save For Later</p>          
+            @endif
+        </div>
+        {{-- End Save For Later --}}
         <div class="wrap-show-advance-info-box style-1 box-in-site">
             <h3 class="title-box">Most Viewed Products</h3>
             <div class="wrap-products">

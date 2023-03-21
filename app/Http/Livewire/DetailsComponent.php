@@ -36,22 +36,31 @@ class DetailsComponent extends Component
     }
 
     // For Increasing Quantity Into Cart
-    public function increaseQuantity($rowId)
+    public function increaseQuantity()
     {
-        $product = Cart::instance('cart')->get($rowId);
-        $qty = $product->qty+1;
-        Cart::update($rowId, $qty);
-        $this->emitTo('cart-count-component', 'refreshComponent');
-
+        $this->qty++;
     }
 
     // For Decreasing Quantity Into Cart
-    public function decreaseQuantity($rowId)
+    public function decreaseQuantity()
     {
-        $product = Cart::instance('cart')->get($rowId);
-        $qty = $product->qty-1;
-        Cart::update($rowId, $qty);
-        $this->emitTo('cart-count-component', 'refreshComponent');
+        if($this->qty > 1)
+        {
+            $this->qty--;
+        }
+        else
+        {
+            $this->qty = 1;
+        }
+    }
 
+    // For Storing Product Into Wishlist
+    public function addToWishList($product_id, $product_name, $product_price)
+    {
+        // You can even make it a one-liner
+        Cart::instance('wishlist')->add($product_id, $product_name, 1, $product_price)->associate('App\Models\Product');
+        $this->emitTo('wish-list-count-component', 'refreshComponent');
+        session()->flash("success_message", "Product Added To Wishlist Successfully!");
+        // return redirect()->route('cart');
     }
 }

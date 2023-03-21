@@ -122,4 +122,11 @@ Route::middleware([
 
     ################################## Sale Settings ###############################################
     Route::get('admin/sale/settings', SaleComponent::class)->name('admin.sale.settings');
+
+    ################################## Coupons ########################################
+    Route::get('admin/coupons', AdminHomeSliderComponent::class)->name('admin.coupons');
+    // For Category Addition
+    Route::get('admin/coupon/add', AdminAddHomeSliderComponent::class)->name('admin.add.coupon');
+    // For Editing Category
+    Route::get('admin/coupon/edit/{coupon_id}', AdminEditHomeSliderComponent::class)->name('admin.edit.coupon');
 });
