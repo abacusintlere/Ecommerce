@@ -10,6 +10,7 @@ use App\Http\Livewire\DetailsComponent;
 use App\Http\Livewire\CategoryComponent;
 use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankYouComponent;
+use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\ContactUsComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
@@ -17,6 +18,9 @@ use App\Http\Livewire\Admin\Sale\SaleComponent;
 use App\Http\Livewire\TermsConditionsComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
+use App\Http\Livewire\Admin\Coupons\CouponComponent;
+use App\Http\Livewire\Admin\Coupons\AddCouponComponent;
+use App\Http\Livewire\Admin\Coupons\EditCouponComponent;
 use App\Http\Livewire\Admin\Product\AdminProductComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
 use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
@@ -29,7 +33,6 @@ use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
-use App\Http\Livewire\WishlistComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -124,9 +127,9 @@ Route::middleware([
     Route::get('admin/sale/settings', SaleComponent::class)->name('admin.sale.settings');
 
     ################################## Coupons ########################################
-    Route::get('admin/coupons', AdminHomeSliderComponent::class)->name('admin.coupons');
+    Route::get('admin/coupons', CouponComponent::class)->name('admin.coupons');
     // For Category Addition
-    Route::get('admin/coupon/add', AdminAddHomeSliderComponent::class)->name('admin.add.coupon');
+    Route::get('admin/coupon/add', AddCouponComponent::class)->name('admin.add.coupon');
     // For Editing Category
-    Route::get('admin/coupon/edit/{coupon_id}', AdminEditHomeSliderComponent::class)->name('admin.edit.coupon');
+    Route::get('admin/coupon/edit/{coupon_id}', EditCouponComponent::class)->name('admin.edit.coupon');
 });

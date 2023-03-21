@@ -8,6 +8,6 @@ class EditCouponComponent extends Component
 {
     public function render()
     {
-        return view('livewire.admin.coupons.edit-coupon-component');
+        return view('livewire.admin.coupons.edit-coupon-component')->layout('layouts.base');
     }
 }
