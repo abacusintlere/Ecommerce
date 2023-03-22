@@ -2,15 +2,28 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Coupon;
 use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartComponent extends Component
 {
 
+    public $haveCouponCode, $couponCode, $discount, $subtotalAfterDiscount, $taxAfterDiscount, $totalAfterDiscount;
     public function render()
     {
+        if(session()->has('coupon'))
+        {
+            if(Cart::instance('cart')->subtotal() < session()->get('coupon')['cart_value'])
+            {
+                session()->forget('coupon');
+            }
+            else{
+                $this->calculateDiscount();
+            }
+        }
         $products = Product::where('is_active', 1)->take(8)->get();
         return view('livewire.cart-component', compact('products'))->layout('layouts.base');
     }
@@ -77,5 +90,42 @@ class CartComponent extends Component
         Cart::instance('saveForLater')->remove($rowId);
         $this->emitTo('cart-count-component', 'refreshComponent');
         session()->flash('s_success_message', "Product Deleted From Saved Later");
+    }
+
+    // Apply Coupon Code
+    public function applyCouponCode()
+    {
+        $coupon = Coupon::where('code', $this->couponCode)->where('cart_value', '<=', Cart::instance('cart')->subtotal())->first();
+        if(!$coupon)
+        {
+            session()->flash('coupon_message', 'Invalid Coupon Code');
+            return;
+        }
+
+        session()->put('coupon',[
+            'code' => $coupon->code,
+            'type' => $coupon->type,
+            'value' => $coupon->value,
+            'cart_value' => $coupon->cart_value
+        ]);
+    }
+
+    // Calculate Discount
+    public function calculateDiscount()
+    {
+        if(Session::has('coupon'))
+        {
+            if(Session::get('coupon')['type'] == 'fixed')
+            {
+                $this->discount = session()->get('coupon')['value'];
+            }
+            else{
+                $this->discount = (Cart::instance('cart')->subtotal() * session()->get('coupon')['value'])/100;
+            }   
+
+            $this->subtotalAfterDiscount = Cart::instance('cart')->subtotal() - $this->discount;
+            $this->taxAfterDiscount = ($this->subtotalAfterDiscount * config('cart.tax'))/100;
+            $this->totalAfterDiscount = $this->subtotalAfterDiscount + $this->taxAfterDiscount;
+        }
     }
 }

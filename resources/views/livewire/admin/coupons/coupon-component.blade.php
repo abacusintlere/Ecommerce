@@ -30,8 +30,10 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Category</th>
-                                    <th>Slug</th>
+                                    <th>Code</th>
+                                    <th>Type</th>
+                                    <th>Coupon Value</th>
+                                    <th>Cart Value</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,10 +42,12 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>{{ $coupon->code }}</td>
-                                        <td>{{ $coupon->slug }}</td>
+                                        <td>{{ $coupon->type=='fixed' ? "$".$coupon->value : $coupon->value."%" }}</td>
+                                        <td>{{ $coupon->value }}</td>
+                                        <td>{{ $coupon->cart_value }}</td>
                                         <td>
-                                            <a href="{{ route('admin.edit.category', $category->slug) }}" ><i class="fa fa-edit fa-2x"></i></a>
-                                            <a href="#" onclick="confirm('Are You Sure To Delete Category?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $category->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>
+                                            <a href="{{ route('admin.edit.coupon', $coupon->id) }}" ><i class="fa fa-edit fa-2x"></i></a>
+                                            <a href="#" onclick="confirm('Are You Sure To Delete Coupon?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $coupon->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>
                                         </td>
                                     </tr>
                                 @endforeach
