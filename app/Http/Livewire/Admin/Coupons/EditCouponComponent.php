@@ -7,7 +7,7 @@ use Livewire\Component;
 
 class EditCouponComponent extends Component
 {
-    public $coupon_code, $coupon_type, $coupon_value, $cart_value, $coupon_id;
+    public $coupon_code, $coupon_type, $coupon_value, $cart_value, $coupon_id, $expiry_date;
 
     // Mounted Function
     public function mount($coupon_id)
@@ -18,6 +18,7 @@ class EditCouponComponent extends Component
         $this->coupon_type = $coupon->type;
         $this->coupon_value = $coupon->value;
         $this->cart_value = $coupon->cart_value;
+        $this->expiry_date = $coupon->expiry_date;
 
     }
     public function render()
@@ -32,7 +33,8 @@ class EditCouponComponent extends Component
             'coupon_code' => 'required|unique:coupons,code',
             'coupon_type' => 'required',
             'coupon_value' => 'required|numeric',
-            'cart_value' => 'required|numeric'
+            'cart_value' => 'required|numeric',
+            'expiry_date' => 'required'
         ]);
     }
 
@@ -43,13 +45,15 @@ class EditCouponComponent extends Component
             'coupon_code' => 'required|unique:coupons,code',
             'coupon_type' => 'required',
             'coupon_value' => 'required|numeric',
-            'cart_value' => 'required|numeric'
+            'cart_value' => 'required|numeric',
+            'expiry_date' => 'required'
         ]);
         $coupon = Coupon::find($this->coupon_id);
         $coupon->code = $this->coupon_code;
         $coupon->type = $this->coupon_type;
         $coupon->value = $this->coupon_value;
         $coupon->cart_value = $this->cart_value;
+        $coupon->expiry_date = $this->expiry_date;
         $coupon->update();
 
         session()->flash('success_message', 'Coupon Updated Successfully!');

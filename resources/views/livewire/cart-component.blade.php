@@ -58,7 +58,7 @@
                 <h4 class="title-box">Order Summary</h4>
                 <p class="summary-info"><span class="title">Subtotal</span><b class="index">${{ Cart::instance('cart')->subtotal() }}</b></p>
                 @if(Session::has('coupon'))
-                    <p class="summary-info"><span class="title">Discount({{ Session::get('coupon')['code'] }})</span><b class="index"> - ${{ number_format($discount,2) }}</b></p>
+                    <p class="summary-info"><span class="title">Discount({{ Session::get('coupon')['code'] }}) <a href="#" wire:click.prevent="removeCoupon"><i class="fa fa-times text-danger"></i></a></span><b class="index"> - ${{ number_format($discount,2) }}</b></p>
                     <p class="summary-info"><span class="title">Tax({{ config('cart.tax') }}%)</span><b class="index">{{ number_format($taxAfterDiscount,2) }}</b></p>
                     <p class="summary-info"><span class="title">Subtotal With Discount</span><b class="index">${{ number_format($subtotalAfterDiscount,2) }}</b></p>
                     <p class="summary-info"><span class="title">Total</span><b class="index">${{number_format( $totalAfterDiscount,2) }}</b></p>

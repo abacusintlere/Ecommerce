@@ -34,6 +34,7 @@
                                     <th>Type</th>
                                     <th>Coupon Value</th>
                                     <th>Cart Value</th>
+                                    <th>Expiry Date</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -45,6 +46,7 @@
                                         <td>{{ $coupon->type=='fixed' ? "$".$coupon->value : $coupon->value."%" }}</td>
                                         <td>{{ $coupon->value }}</td>
                                         <td>{{ $coupon->cart_value }}</td>
+                                        <td>{{ $coupon->expiry_date }}</td>
                                         <td>
                                             <a href="{{ route('admin.edit.coupon', $coupon->id) }}" ><i class="fa fa-edit fa-2x"></i></a>
                                             <a href="#" onclick="confirm('Are You Sure To Delete Coupon?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $coupon->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>

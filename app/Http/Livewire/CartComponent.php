@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Coupon;
 use App\Models\Product;
 use Livewire\Component;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Session;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
@@ -95,7 +96,7 @@ class CartComponent extends Component
     // Apply Coupon Code
     public function applyCouponCode()
     {
-        $coupon = Coupon::where('code', $this->couponCode)->where('cart_value', '<=', Cart::instance('cart')->subtotal())->first();
+        $coupon = Coupon::where('code', $this->couponCode)->where('cart_value', '<=', Cart::instance('cart')->where('expiry_date', '>=', Carbon::today())->subtotal())->first();
         if(!$coupon)
         {
             session()->flash('coupon_message', 'Invalid Coupon Code');
@@ -127,5 +128,11 @@ class CartComponent extends Component
             $this->taxAfterDiscount = ($this->subtotalAfterDiscount * config('cart.tax'))/100;
             $this->totalAfterDiscount = $this->subtotalAfterDiscount + $this->taxAfterDiscount;
         }
+    }
+
+    // Remove Coupon
+    public function removeCoupon()
+    {
+        session()->forget('coupon');
     }
 }
