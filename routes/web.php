@@ -16,11 +16,13 @@ use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\Admin\Sale\SaleComponent;
 use App\Http\Livewire\TermsConditionsComponent;
+use App\Http\Livewire\Admin\Orders\OrderComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Coupons\CouponComponent;
 use App\Http\Livewire\Admin\Coupons\AddCouponComponent;
 use App\Http\Livewire\Admin\Coupons\EditCouponComponent;
+use App\Http\Livewire\Admin\Orders\OrderDetailsComponent;
 use App\Http\Livewire\Admin\Product\AdminProductComponent;
 use App\Http\Livewire\Admin\Category\AdminCategoryComponent;
 use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
@@ -33,7 +35,6 @@ use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
-use App\Http\Livewire\Admin\Orders\OrderComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -136,4 +137,5 @@ Route::middleware([
 
     ################################## Orders ########################################
     Route::get('admin/orders', OrderComponent::class)->name('admin.orders');
+    Route::get('admin/orders/{order_id}', OrderDetailsComponent::class)->name('admin.order.details');
 });
