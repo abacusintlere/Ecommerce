@@ -33,6 +33,7 @@ use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
+use App\Http\Livewire\Admin\Orders\OrderComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -132,4 +133,7 @@ Route::middleware([
     Route::get('admin/coupon/add', AddCouponComponent::class)->name('admin.add.coupon');
     // For Editing Category
     Route::get('admin/coupon/edit/{coupon_id}', EditCouponComponent::class)->name('admin.edit.coupon');
+
+    ################################## Orders ########################################
+    Route::get('admin/orders', OrderComponent::class)->name('admin.orders');
 });

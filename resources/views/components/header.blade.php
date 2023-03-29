@@ -55,6 +55,9 @@
                                                 <a title="All Products" href="{{ route('admin.products') }}">All Products</a>
                                             </li>
                                             <li class="menu-item" >
+                                                <a title="All Orders" href="{{ route('admin.orders') }}">All Orders</a>
+                                            </li>
+                                            <li class="menu-item" >
                                                 <a title="Manage Home Sliders" href="{{ route('admin.sliders') }}">Manage Home Sliders</a>
                                             </li>
                                             <li class="menu-item" >
