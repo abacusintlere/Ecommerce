@@ -76,6 +76,11 @@
                                         <div class="price-field sub-total">
                                             <p class="price">${{ $item->quantity * $item->price}}</p>
                                         </div>
+                                        @if ($order->status =="delivered" && $item->rstatus==false)
+                                            <div class="price-field sub-total">
+                                                <p class="price"><a href="{{ route('user.review', $item->id) }}">Write Review</a></p>
+                                            </div>
+                                        @endif
                                     </li>             
                                 @endforeach
                             </ul>

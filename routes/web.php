@@ -35,6 +35,7 @@ use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
+use App\Http\Livewire\User\ReviewComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,6 +92,7 @@ Route::middleware([
     ################################## User Orders ########################################
     Route::get('user/orders', OrderComponent::class)->name('user.orders');
     Route::get('user/orders/{order_id}', OrderDetailsComponent::class)->name('user.order.details');
+    Route::get('user/review/{order_item_id}', ReviewComponent::class)->name('user.review');
 });
 
 // Authentication Routes For Admin
