@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         // $role = Role::create(['name' => 'User']);
         // User::factory(15)->create();
-        // Category::factory(10)->create();
+        Category::factory(10)->create();
         Product::factory(100)->create();
     }
 }

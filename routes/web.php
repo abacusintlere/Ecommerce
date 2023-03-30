@@ -88,6 +88,9 @@ Route::middleware([
 ])->group(function () {
     // User Dashboard
     Route::get('user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
+    ################################## User Orders ########################################
+    Route::get('user/orders', OrderComponent::class)->name('user.orders');
+    Route::get('user/orders/{order_id}', OrderDetailsComponent::class)->name('user.order.details');
 });
 
 // Authentication Routes For Admin

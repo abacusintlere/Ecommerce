@@ -1,5 +1,16 @@
-<div class="container">
 
+<div class="container">
+    <style>
+.wrap-address-billing .row-in-form input[type=password] {
+    font-size: 13px;
+    line-height: 19px;
+    display: inline-block;
+    height: 43px;
+    padding: 2px 20px;
+    width: 100%;
+    border: 1px solid #e6e6e6;
+}
+    </style>
     <div class="wrap-breadcrumb">
         <ul>
             <li class="item-link"><a href="{{ route('home') }}" class="link">Home</a></li>

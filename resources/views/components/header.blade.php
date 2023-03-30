@@ -75,6 +75,9 @@
                                             <li class="menu-item" >
                                                 <a title="User Dashboard" href="{{ route('user.dashboard') }}">Dashboard</a>
                                             </li>
+                                            <li class="menu-item" >
+                                                <a title="My All Orders" href="{{ route('user.orders') }}">My Orders</a>
+                                            </li>
                                         @endrole
                                         <li class="menu-item" >
                                             <a title="Pound (GBP)" href="#">Profile</a>

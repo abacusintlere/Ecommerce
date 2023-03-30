@@ -3,6 +3,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
+                @if (Session::has('order_message'))
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('order_message') }}
+                    </div>
+                @endif
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="row">
@@ -10,7 +15,11 @@
                                 Ordered Details
                             </div>
                             <div class="col-md-6">
-                                <a href="{{ route('admin.orders') }}" class="btn btn-success pull-right">All Orders</a>
+                                <a href="{{ route('user.orders') }}" class="btn btn-success pull-right">My Orders</a>
+                                @if ($order->status =="ordered")
+                                    <a href="#" wire:click.prevent='cancleOrder({{ $order->id }})' class="btn btn-warning pull-right" style="margin-right:20px;">Cancel Order</a>
+
+                                @endif
                             </div>
                         </div>
                     </div>

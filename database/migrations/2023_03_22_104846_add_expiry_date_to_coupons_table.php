@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
@@ -14,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('coupons', function (Blueprint $table) {
             //
-            $table->date('expiry_date')->default(DB::raw('CURRENT_DATE'));
+            $table->date('expiry_date')->default(Carbon::now());
         });
     }
 
@@ -25,7 +26,7 @@ return new class extends Migration
     {
         Schema::table('coupons', function (Blueprint $table) {
             //
-            $table->date('expiry_date')->default(DB::raw('CURRENT_DATE'));
+            $table->date('expiry_date')->default(Carbon::now());
 
         });
     }
