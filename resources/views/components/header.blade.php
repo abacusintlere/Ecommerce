@@ -78,6 +78,9 @@
                                             <li class="menu-item" >
                                                 <a title="My All Orders" href="{{ route('user.orders') }}">My Orders</a>
                                             </li>
+                                            <li class="menu-item" >
+                                                <a title="Change Password" href="{{ route('user.password.change') }}">Change Password</a>
+                                            </li>
                                         @endrole
                                         <li class="menu-item" >
                                             <a title="Pound (GBP)" href="#">Profile</a>

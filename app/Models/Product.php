@@ -36,6 +36,11 @@ class Product extends Model
     // A Product Belongs to a Particular Category
     public function category()
     {
-        $this->belongsTo(Category::class,'category_id', 'id');
+        return $this->belongsTo(Category::class,'category_id', 'id');
+    }
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class, 'order_item_id', 'id');
     }
 }
