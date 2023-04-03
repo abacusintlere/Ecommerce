@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 class AdminAddProductComponent extends Component
 {
-    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $is_active;
+    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $images, $is_active;
 
     // Mount Function
     public function mount()
@@ -85,6 +85,22 @@ class AdminAddProductComponent extends Component
         $thumbnail = Carbon::now()->timestamp.'.'.$this->thumbnail->extension(); 
         $this->thumbnail->storeAs('products', $thumbnail);
         $product->thumbnail = $thumbnail;
+
+        // Product Gallery
+        if($this->images)
+        {
+            $imagesNames = '';
+            foreach($this->images as $key => $image)
+            {
+                $imgName = Carbon::now()->timestamp. $key . '.'.$image->extension(); 
+                $image->storeAs('products', $imgName);
+
+                $imagesNames = $imagesNames . ',' . $imgName;
+
+            }
+            $product->images = $imagesNames;
+        }
+
         $product->category_id = $this->category;
         $product->is_active = $this->is_active;
         $product->save();

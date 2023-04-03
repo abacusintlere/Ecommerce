@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 use Livewire\WithFileUploads;
 class AdminEditProductComponent extends Component
 {
-    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $is_active, $product_id, $newImage;
+    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $is_active, $product_id, $newImage, $images, $newImages;
 
     // Mount Function
     public function mount($product_slug)
@@ -28,6 +28,7 @@ class AdminEditProductComponent extends Component
         $this->featured = $product->featured;
         $this->quantity =  $product->quantity;
         $this->thumbnail = $product->thumbnail;
+        $this->images = explode(",", $product->images);
         $this->category = $product->category;
         $this->is_active = $product->is_active;
     } 
@@ -63,6 +64,13 @@ class AdminEditProductComponent extends Component
             'category_id' => 'required',
             'is_active' => 'required',
         ]);
+
+        if($this->newImage)
+        {
+            $this->validateOnly($fields, [
+                'newImage' => 'required|mimes:png,jpg',
+            ]);
+        }
     }
 
     // Updating Products
@@ -83,6 +91,13 @@ class AdminEditProductComponent extends Component
             'category_id' => 'required',
             'is_active' => 'required',
         ]);
+
+        if($this->newImage)
+        {
+            $this->validate([
+                'newImage' => 'required|mimes:png,jpg',
+            ]);
+        }
         $product = Product::find($this->product_id);
         $product->name = $this->name;
         $product->slug = $this->slug;
@@ -96,9 +111,35 @@ class AdminEditProductComponent extends Component
         $product->quantity = $this->quantity;
         if($this->newImage)
         {
+            unlink("assets/images/products" . $product->thumbnail);
             $thumbnail = Carbon::now()->timestamp.'.'.$this->thumbnail->extension(); 
             $this->thumbnail->storeAs('products', $thumbnail);
             $product->thumbnail = $thumbnail;
+        }
+
+        if($this->newImages)
+        {
+            $images = explode(",", $product->images);
+            foreach($images as $img)
+            {
+                if($img)
+                {
+                    unlink("assets/images/products" . $img);
+
+                }
+            }
+
+            $imagesNames = '';
+            foreach($this->newImages as $key => $image)
+            {
+                $imgName = Carbon::now()->timestamp. $key . '.'.$image->extension(); 
+                $image->storeAs('products', $imgName);
+
+                $imagesNames = $imagesNames . ',' . $imgName;
+
+            }
+            $product->images = $imagesNames;
+
         }
 
         $product->category_id = $this->category;

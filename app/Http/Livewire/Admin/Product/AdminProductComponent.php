@@ -17,7 +17,25 @@ class AdminProductComponent extends Component
     // For Deleting Product
     public function delete($id)
     {
-        Product::find($id)->delete();
+        $product = Product::find($id);
+        if($product->thumbnail)
+        {
+            unlink('assets/images/products' . '/' . $product->thumbnail);
+        }
+
+        if($product->images)
+        {
+            $images = explode(",", $product->images);
+            foreach($images as $img)
+            {
+                if($img)
+                {
+                    unlink('assets/images/products' . '/' . $img);
+                }
+            }
+        }
+
+        $product->delete();
         session()->flash('success_message', 'Product Deleted Successfully!');
     }
 }

@@ -134,6 +134,28 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="thumbnail" class="col-md-4 control-label">Product Gallery</label>
+                                <div class="col-md-4">
+                                    <input type="file" id="thumbnail" name="thumbnail" class="input-file" placeholder="Thumbnail" wire:model="newImages" multiple>
+
+                                    @if($newImages)
+                                        @foreach ($newImages as $newImage)
+                                            @if ($newImage)
+                                                <img src="{{ $newImage->temporaryUrl() }}" alt="" width="220" height="220">
+                                            @endif
+                                        @endforeach
+                                    @else
+                                        @foreach ($images as $image)
+                                            @if ($image)
+                                                <img src="{{ asset('assets/images/products/') }}{{ $image }}" alt="" srcset="">
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="category" class="col-md-4 control-label">Product Category</label>
                                 <div class="col-md-4">
                                     <select id="category" name="category" class="form-control input-md" wire:model="category">

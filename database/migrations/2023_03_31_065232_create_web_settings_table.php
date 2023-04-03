@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->string('phone2');
-            $table->string('address');
-            $table->string('map');
+            $table->text('address');
+            $table->text('map');
             $table->string('twitter');
             $table->string('facebook');
             $table->string('pinterest');

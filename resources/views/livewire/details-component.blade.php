@@ -42,40 +42,24 @@
         <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 main-content-area">
             <div class="wrap-product-detail">
                 <div class="detail-media">
-                    <div class="product-gallery">
+                    <div class="product-gallery" wire:ignore>
                         <ul class="slides">
-
-                            <li data-thumb="assets/images/products/digital_18.jpg">
-                                <img src="assets/images/products/digital_18.jpg" alt="product thumbnail" />
+                            <li data-thumb="{{ asset('assets/images/products') }}/ {{ $product->thumbnail }}">
+                                <img src="{{ asset('assets/images/products') }}/ {{ $product->thumbnail }}" alt="{{ $product->name }}" />
                             </li>
 
-                            <li data-thumb="assets/images/products/digital_17.jpg">
-                                <img src="assets/images/products/digital_17.jpg" alt="product thumbnail" />
-                            </li>
+                            @php
+                                $images = explode(',', $product->images);
+                            @endphp
 
-                            <li data-thumb="assets/images/products/digital_15.jpg">
-                                <img src="assets/images/products/digital_15.jpg" alt="product thumbnail" />
-                            </li>
+                            @foreach ($images as $image)
+                                @if($image)
+                                    <li data-thumb="{{ asset('assets/images/products') }}/ {{ $image }}">
+                                        <img src="{{ asset('assets/images/products') }}/ {{ $image }}" alt="{{ $product->name }}" />
+                                    </li>
+                                @endif
+                            @endforeach
 
-                            <li data-thumb="assets/images/products/digital_02.jpg">
-                                <img src="assets/images/products/digital_02.jpg" alt="product thumbnail" />
-                            </li>
-
-                            <li data-thumb="assets/images/products/digital_08.jpg">
-                                <img src="assets/images/products/digital_08.jpg" alt="product thumbnail" />
-                            </li>
-
-                            <li data-thumb="assets/images/products/digital_10.jpg">
-                                <img src="assets/images/products/digital_10.jpg" alt="product thumbnail" />
-                            </li>
-
-                            <li data-thumb="assets/images/products/digital_12.jpg">
-                                <img src="assets/images/products/digital_12.jpg" alt="product thumbnail" />
-                            </li>
-
-                            <li data-thumb="assets/images/products/digital_14.jpg">
-                                <img src="assets/images/products/digital_14.jpg" alt="product thumbnail" />
-                            </li>
 
                         </ul>
                     </div>
