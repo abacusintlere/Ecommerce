@@ -69,6 +69,9 @@
                                             <li class="menu-item" >
                                                 <a title="All Coupons" href="{{ route('admin.coupons') }}">All Coupons</a>
                                             </li>
+                                            <li class="menu-item" >
+                                                <a title="All Contact Messages" href="{{ route('admin.contact.messages') }}">All Contact Us</a>
+                                            </li>
                                         @endrole
                                         {{-- For User  --}}
                                         @role('User')

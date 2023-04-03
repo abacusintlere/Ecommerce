@@ -24,7 +24,7 @@
                                 <label for="current_password" class="col-md-4 control-label">Current Password</label>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control input-md" placeholder="Current Password" name="current_password" id="current_password" wire:model='current_password'>
-                                    @error('current_password') <span class="text-danger">{{ $message }}</span>@enderror
+                                    @error('current_password') <p class="text-danger">{{ $message }}</p>@enderror
                                 </div>
                             </div>
 
@@ -32,7 +32,7 @@
                                 <label for="password" class="col-md-4 control-label">New Password</label>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control input-md" placeholder="New Password" name="password" id="password" wire:model='password'>
-                                    @error('password') <span class="text-danger">{{ $message }}</span>@enderror
+                                    @error('password') <p class="text-danger">{{ $message }}</p>@enderror
 
                                 </div>
                             </div>
@@ -41,7 +41,7 @@
                                 <label for="password_confirmation" class="col-md-4 control-label">Confirm Password</label>
                                 <div class="col-md-4">
                                     <input type="password" class="form-control input-md" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" wire:model='password_confirmation'>
-                                    @error('password_confirmation') <span class="text-danger">{{ $message }}</span>@enderror
+                                    @error('password_confirmation') <p class="text-danger">{{ $message }}</p>@enderror
 
                                 </div>
                             </div>

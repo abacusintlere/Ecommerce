@@ -25,6 +25,9 @@ class DatabaseSeeder extends Seeder
         // ]);
         // $role = Role::create(['name' => 'User']);
         // User::factory(15)->create();
+        $this->call(SaleSeeder::class);
+        $this->call(HomeCategorySeeder::class);
+        $this->call(WebSettingSeeder::class);
         Category::factory(10)->create();
         Product::factory(100)->create();
     }

@@ -30,6 +30,7 @@ use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
 use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
+use App\Http\Livewire\Admin\ContactUsComponent as AdminContactUsComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
@@ -147,4 +148,7 @@ Route::middleware([
     ################################## Orders ########################################
     Route::get('admin/orders', OrderComponent::class)->name('admin.orders');
     Route::get('admin/orders/{order_id}', OrderDetailsComponent::class)->name('admin.order.details');
+
+    ################################## Contact Us Message ########################################
+    Route::get('admin/contact/messages', AdminContactUsComponent::class)->name('admin.contact.messages');
 });
