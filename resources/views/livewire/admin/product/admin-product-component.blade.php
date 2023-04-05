@@ -8,7 +8,7 @@
         }
     </style>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-    <div class="container">
+    <div class="container" style="padding:30px 0px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -45,7 +45,7 @@
                                     <tr>
                                         <td>{{ $key+1 }}</td>
                                         <td>
-                                            <img src="{{ asset('assets/images/products/') }}{{ $product->thumbnail }}" alt="{{ $product->name }}">
+                                            <img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}" width="50">
                                         </td>
                                         <td>{{ $product->name }}</td>
                                         <td>{{ $product->stock_status }}</td>

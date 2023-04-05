@@ -1,6 +1,6 @@
 <div>
     {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
-    <div class="container">
+    <div class="container" style="padding:30px 0px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

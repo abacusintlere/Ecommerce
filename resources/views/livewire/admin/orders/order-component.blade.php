@@ -9,7 +9,7 @@
         }
     </style>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-    <div class="container">
+    <div class="container" style="padding:30px 0px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">

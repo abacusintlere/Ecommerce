@@ -125,19 +125,19 @@
                 <h2 class="widget-title">All Categories</h2>
                 <div class="widget-content">
                     <ul class="list-category">
-                        {{-- @foreach ($categories as $category)
+                        @foreach ($categories as $category)
                         <li class="category-item has-child-cate">
-                            <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ $category->name }}</a>
-                            @if (!empty($category->sub_categories))
+                            <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ Str::title($category->name) }}</a>
+                            @if ($category->sub_categories->count()  >0)
                                 <span class="toggle-control">+</span>
                                 <ul class="sub-cate">
-                                    @foreach ($sub_categories as $sub_category)
-                                        <li class="category-item"><a href="{{ route('products.category', $sub_category->slug) }}" class="cate-link">{{ $sub_category->name }} (22)</a></li>
+                                    @foreach ($category->sub_categories as $sub_category)
+                                        <li class="category-item"><a href="{{ route('products.category', $sub_category->slug) }}" class="cate-link">{{ Str::title($sub_category->name) }} (22)</a></li>
                                     @endforeach
                                 </ul>
                             @endif
                         </li>
-                        @endforeach --}}
+                        @endforeach
 
                         {{-- <li class="category-item">
                             <a href="#" class="cate-link">Tools & Equipments</a>
@@ -172,7 +172,7 @@
                 </div>
             </div><!-- Price-->
 
-            <div class="widget mercado-widget filter-widget">
+            <div class="widget mercado-widget filter-widget" style="padding:30px 0px;">
                 <h2 class="widget-title">Color</h2>
                 <div class="widget-content">
                     <ul class="list-style vertical-list has-count-index">

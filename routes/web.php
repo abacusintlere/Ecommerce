@@ -12,12 +12,15 @@ use App\Http\Livewire\CheckoutComponent;
 use App\Http\Livewire\ThankYouComponent;
 use App\Http\Livewire\WishlistComponent;
 use App\Http\Livewire\ContactUsComponent;
+use App\Http\Livewire\User\ReviewComponent;
 use App\Http\Livewire\ReturnPolicyComponent;
 use App\Http\Livewire\PrivacyPolicyComponent;
+use App\Http\Livewire\User\UserOrderComponent;
 use App\Http\Livewire\Admin\Sale\SaleComponent;
 use App\Http\Livewire\TermsConditionsComponent;
 use App\Http\Livewire\Admin\Orders\OrderComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
+use App\Http\Livewire\User\ChangePasswordComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Coupons\CouponComponent;
 use App\Http\Livewire\Admin\Coupons\AddCouponComponent;
@@ -30,14 +33,12 @@ use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
 use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
 use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
-use App\Http\Livewire\Admin\ContactUsComponent as AdminContactUsComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
-use App\Http\Livewire\User\ChangePasswordComponent;
-use App\Http\Livewire\User\ReviewComponent;
+use App\Http\Livewire\Admin\ContactUsComponent as AdminContactUsComponent;
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +93,7 @@ Route::middleware([
     // User Dashboard
     Route::get('user/dashboard', UserDashboardComponent::class)->name('user.dashboard');
     ################################## User Orders ########################################
-    Route::get('user/orders', OrderComponent::class)->name('user.orders');
+    Route::get('user/orders', UserOrderComponent::class)->name('user.orders');
     Route::get('user/orders/{order_id}', OrderDetailsComponent::class)->name('user.order.details');
     Route::get('user/review/{order_item_id}', ReviewComponent::class)->name('user.review');
 

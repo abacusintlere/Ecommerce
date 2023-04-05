@@ -50,7 +50,7 @@
                             <div class="form-group">
                                 <label for="desc" class="col-md-4 control-label">Description</label>
                                 <div class="col-md-4">
-                                    <textarea type="text" id="desc" name="desc" class="form-control" placeholder="Product Slug" wire:model="desc"> </textarea>
+                                    <textarea type="text" id="desc" name="desc" class="form-control" placeholder="Product Description" wire:model="desc"> </textarea>
                                     @error('desc') <span class="text-danger">{{ $message }}</span> @enderror
 
                                 </div>
@@ -75,7 +75,7 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="sku" class="col-md-4 control-label">Description</label>
+                                <label for="sku" class="col-md-4 control-label">SKU</label>
                                 <div class="col-md-4">
                                     <input type="text" id="sku" name="sku" class="form-control input-md" placeholder="SKU" wire:model="sku">
                                     @error('sku') <span class="text-danger">{{ $message }}</span> @enderror
@@ -134,9 +134,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="thumbnail" class="col-md-4 control-label">Product Gallery</label>
+                                <label for="newImages" class="col-md-4 control-label">Product Gallery</label>
                                 <div class="col-md-4">
-                                    <input type="file" id="thumbnail" name="thumbnail" class="input-file" placeholder="Thumbnail" wire:model="newImages" multiple>
+                                    <input type="file" id="newImages" name="newImages" class="input-file" placeholder="Product Gallery" wire:model="newImages" multiple>
 
                                     @if($newImages)
                                         @foreach ($newImages as $newImage)
@@ -185,7 +185,7 @@
                             <div class="form-group">
                                 <label for="category_name" class="col-md-4 control-label"></label>
                                 <div class="col-md-4">
-                                    <button type="submit" class="btn btn-primary">Save Product</button>
+                                    <button type="submit" class="btn btn-primary">Update Product</button>
                                 </div>
                             </div>
 

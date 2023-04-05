@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 
 class AdminEditCategoryComponent extends Component
 {
-    public $category_slug, $category_id, $name, $slug, $is_active;
+    public $category_slug, $category_id, $name, $slug, $is_active, $parent_category;
 
     // Mount Function
     public function mount($category_slug)
@@ -18,12 +18,17 @@ class AdminEditCategoryComponent extends Component
         $this->category_id = $category->id;
         $this->name = $category->name;
         $this->slug = $category->slug;
+        if($category->parent_id)
+        {
+            $this->parent_category = $category->parent_id;
+        }
         $this->is_active = $category->is_active;
     }
 
     public function render()
     {
-        return view('livewire.admin.category.admin-edit-category-component')->layout('layouts.base');
+        $categories = Category::where('is_active',1)->get();
+        return view('livewire.admin.category.admin-edit-category-component', compact('categories'))->layout('layouts.base');
     }
 
     // For Generating Slug
@@ -54,6 +59,7 @@ class AdminEditCategoryComponent extends Component
         $category = Category::find($this->category_id);
         $category->name = $this->name;
         $category->slug = $this->slug;
+        $category->parent_id = $this->parent_category;
         $category->is_active = $this->is_active;
         $category->update();
         session()->flash('success_message','Category Updated Successfully!');

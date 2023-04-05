@@ -38,6 +38,19 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="parent_category" class="col-md-4 control-label">Parent Category</label>
+                                <div class="col-md-4">
+                                    <select name="parent_category" id="parent_category" class="form-control input-md" wire:model="parent_category">
+                                        <option value="null" selected>None</option>
+                                        @foreach ($categories as $category)
+                                            <option value="{{ $category->id }}" {{ $category->id == $category_id ? "selected" : "" }}>{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    @error('parent_category') <span class="text-danger">{{ $message }}</span> @enderror
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="is_active" class="col-md-4 control-label">Category Status</label>
                                 <div class="col-md-4">
                                     <select name="is_active" id="is_active" class="form-control input-md" wire:model="is_active">

@@ -2,10 +2,11 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Category;
 use App\Models\Product;
 use Livewire\Component;
+use App\Models\Category;
 use Livewire\WithPagination;
+use Illuminate\Support\Facades\Auth;
 use Gloudemans\Shoppingcart\Facades\Cart;
 
 class ShopComponent extends Component
@@ -43,8 +44,14 @@ class ShopComponent extends Component
             $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->paginate($this->pagesize);
  
         }
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
+            Cart::instance('wishlist')->store(Auth::user()->email);
+
+        }
         $papular_products = Product::where('featured', true)->take(4)->get();
-        $categories = Category::where('is_active', 1)->get();
+        $categories = Category::where('is_active', 1)->whereNull('parent_id')->get();
         return view('livewire.shop-component', compact('products','papular_products','categories'))->layout('layouts.base');
     }
 

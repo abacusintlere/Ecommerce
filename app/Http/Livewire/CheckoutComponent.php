@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Mail\OrderMail;
+use Exception;
 use App\Models\Order;
 use Livewire\Component;
 use App\Models\Shipping;
 use App\Models\OrderItem;
 use App\Models\Transaction;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Cartalyst\Stripe\Laravel\Facades\Stripe;
-use Exception;
 
 class CheckoutComponent extends Component
 {
@@ -236,6 +238,8 @@ class CheckoutComponent extends Component
 
         // Setting Thank You Variable to 1
         $this->thankyou=1;
+        // Sending Order Confirmation Email
+        $this->sendOrderConfirmationEmail($order);
         // Now Finally Destroying Cart
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
@@ -275,5 +279,11 @@ class CheckoutComponent extends Component
         $this->thankyou=1;
         Cart::instance('cart')->destroy();
         session()->forget('checkout');
+    }
+
+    // For Sending Order Email to Customer
+    public function sendOrderConfirmationEmail($order)
+    {
+        Mail::to($order->email)->send(new OrderMail($order));
     }
 }

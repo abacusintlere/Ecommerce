@@ -6,9 +6,12 @@
         nav .hidden{
             display: block !important;
         }
+        .sclist{
+            list-style: none;
+        }
     </style>
     {{-- Close your eyes. Count to one. That is how long forever feels. --}}
-    <div class="container">
+    <div class="container" style="padding:30px 0px;">
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
@@ -32,6 +35,7 @@
                                     <th>ID</th>
                                     <th>Category</th>
                                     <th>Slug</th>
+                                    <th>Subcategory</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -39,8 +43,21 @@
                                 @foreach ($categories as $key=> $category)
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $category->name }}</td>
+                                        <td>{{ Str::title($category->name) }}</td>
                                         <td>{{ $category->slug }}</td>
+                                        <td>
+                                            <ul class="sclist">
+                                                @foreach ($category->sub_categories as $subcat)
+                                                    <li class="fa fa-caret-right"> {{ Str::title($subcat->name) }}</li>
+                                                    <a href="{{ route('admin.edit.category', $subcat->slug) }}">
+                                                        <li class="fa fa-edit"></li>
+                                                    </a>
+                                                    <a href="#" onclick="confirm('Are You Sure To Delete Category?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $subcat->id }})">
+                                                        <li class="fa fa-times text-danger"></li>
+                                                    </a>
+                                                @endforeach
+                                            </ul>
+                                        </td>
                                         <td>
                                             <a href="{{ route('admin.edit.category', $category->slug) }}" ><i class="fa fa-edit fa-2x"></i></a>
                                             <a href="#" onclick="confirm('Are You Sure To Delete Category?') || event.stopImmediatePropagation()" wire:click.prevent="delete({{ $category->id }})"><i class="ml-2 fa fa-times fa-2x text-danger"></i></a>

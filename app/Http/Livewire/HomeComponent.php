@@ -8,6 +8,8 @@ use Livewire\Component;
 use App\Models\Category;
 use App\Models\HomeSlider;
 use App\Models\HomeCategory;
+use Illuminate\Support\Facades\Auth;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class HomeComponent extends Component
 {
@@ -27,6 +29,13 @@ class HomeComponent extends Component
         $sale_products = Product::where('sale_price', '>', 0)->inRandomOrder()->take(8)->get();
         // Sale
         $sale = Sale::find(1);
+
+        if(Auth::check())
+        {
+            Cart::instance('cart')->restore(Auth::user()->email);
+            Cart::instance('wishlist')->restore(Auth::user()->email);
+        }
+
         return view('livewire.home-component', compact('sliders', 'lproducts', 'categories','no_of_products','sale_products', 'sale'))->layout('layouts.base');
     }
 }

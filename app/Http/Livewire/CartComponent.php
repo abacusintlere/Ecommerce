@@ -28,6 +28,12 @@ class CartComponent extends Component
         }
         $this->setAmountForCheckout();
         $products = Product::where('is_active', 1)->take(8)->get();
+        
+        if(Auth::check())
+        {
+            Cart::instance('cart')->store(Auth::user()->email);
+        }
+
         return view('livewire.cart-component', compact('products'))->layout('layouts.base');
     }
     // For Increasing Quantity Into Cart

@@ -6,7 +6,7 @@ use App\Models\Order;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-class OrderComponent extends Component
+class UserOrderComponent extends Component
 {
     public function render()
     {

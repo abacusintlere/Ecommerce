@@ -10,7 +10,7 @@ class CouponComponent extends Component
     use WithPagination;
     public function render()
     {
-        $coupons = Coupon::all();
+        $coupons = Coupon::paginate(20);
         return view('livewire.admin.coupons.coupon-component', compact('coupons'))->layout('layouts.base');
     }
 

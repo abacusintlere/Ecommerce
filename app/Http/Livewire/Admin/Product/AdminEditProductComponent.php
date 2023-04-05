@@ -29,8 +29,9 @@ class AdminEditProductComponent extends Component
         $this->quantity =  $product->quantity;
         $this->thumbnail = $product->thumbnail;
         $this->images = explode(",", $product->images);
-        $this->category = $product->category;
+        $this->category = $product->category_id;
         $this->is_active = $product->is_active;
+        // dd($this->category);
     } 
 
     // Generate Slug
@@ -61,7 +62,7 @@ class AdminEditProductComponent extends Component
             'featured' => 'required',
             'quantity' => 'required|numeric',
             'thumbnail' => 'required|mimes:png,jpg',
-            'category_id' => 'required',
+            'category' => 'required',
             'is_active' => 'required',
         ]);
 
@@ -88,7 +89,7 @@ class AdminEditProductComponent extends Component
             'featured' => 'required',
             'quantity' => 'required|numeric',
             'thumbnail' => 'required|mimes:png,jpg',
-            'category_id' => 'required',
+            'category' => 'required',
             'is_active' => 'required',
         ]);
 

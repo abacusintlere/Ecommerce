@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedInteger('quantity')->default(0);
             $table->string('thumbnail')->nullable();
             $table->text('images')->nullable();
-            $table->foreignId('category_id')->constrained('products');
+            $table->foreignId('category_id')->constrained('categories');
             $table->boolean('is_active')->default(1);
             $table->timestamps();
         });

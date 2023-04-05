@@ -10,7 +10,7 @@ class AdminCategoryComponent extends Component
     use WithPagination;
     public function render()
     {
-        $categories = Category::paginate(12);
+        $categories = Category::whereNull('parent_id')->paginate(12);
         return view('livewire.admin.category.admin-category-component', compact('categories'))->layout('layouts.base');
     }
 
