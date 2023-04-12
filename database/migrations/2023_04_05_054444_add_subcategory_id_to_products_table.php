@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('Products', function (Blueprint $table) {
             //
-            $table->foreignId('subcategory_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('subcategory_id')->nullable()->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -24,7 +24,9 @@ return new class extends Migration
     {
         Schema::table('Products', function (Blueprint $table) {
             //
-            $table->foreignId('subcategory_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            // $table->foreignId('subcategory_id')->constrained('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->dropForeign('products_subcategory_id_foreign');
+            $table->dropColumn('subcategory_id');
 
         });
     }

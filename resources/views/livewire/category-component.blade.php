@@ -95,12 +95,12 @@
                     <ul class="list-category">
                         @foreach ($categories as $category)
                         <li class="category-item has-child-cate">
-                            <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ Str::title($category->name) }}</a>
+                            <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}" class="cate-link">{{ Str::title($category->name) }}</a>
                             @if ($category->sub_categories->count()  >0)
                                 <span class="toggle-control">+</span>
                                 <ul class="sub-cate">
                                     @foreach ($category->sub_categories as $sub_category)
-                                        <li class="category-item"><a href="{{ route('products.category', $sub_category->slug) }}" class="cate-link">{{ Str::title($sub_category->name) }} (22)</a></li>
+                                        <li class="category-item"><a href="{{ route('products.category', ['category_slug' => $category->slug, 'subcategory_slug' => $sub_category->slug], ) }}" class="cate-link">{{ Str::title($sub_category->name) }} ({{ $sub_category->sub_category_products->count() }})</a></li>
                                     @endforeach
                                 </ul>
                             @endif

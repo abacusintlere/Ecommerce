@@ -12,38 +12,44 @@ class CategoryComponent extends Component
 {
     use WithPagination;
 
-    public $sorting, $pagesize, $min_price, $max_price, $category_slug;
+    public $sorting, $pagesize, $min_price, $max_price, $category_slug, $subcategory_slug;
 
     // Mount Function
-    public function mount($category_slug)
+    public function mount($category_slug, $subcategory_slug=null)
     {
         $this->sorting = "default";
         $this->pagesize = 12;
         $this->min_price = 1;
         $this->max_price = 1000;
         $this->category_slug = $category_slug;
+        if($this->subcategory_slug)
+        {
+            $this->subcategory_slug = $subcategory_slug;
+        }
+        // dd($this->subcategory_slug);
     } 
 
     public function render()
     {
-        $category = Category::where('slug', $this->category_slug)->first();
+        $category = Category::where('slug', $this->category_slug)->orWhere('slug', $this->subcategory_slug)->first();
         $category_id = $category->id;
+        // dd($category_id);
         if($this->sorting == "data")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         elseif($this->sorting == "price")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
  
         }
         elseif($this->sorting == "price-desc")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         else
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->paginate($this->pagesize);
  
         }
         $papular_products = Product::where('featured', true)->take(4)->get();

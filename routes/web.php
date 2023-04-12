@@ -58,7 +58,7 @@ Route::get('shop', ShopComponent::class)->name('shop');
 // Product Details
 Route::get('product/details/{slug}', DetailsComponent::class)->name('product.details');
 // For Getting Products of a Particular Category
-Route::get('products-category/{category_slug}', CategoryComponent::class)->name('products.category');
+Route::get('products-category/{category_slug}/{subcategory_slug?}', CategoryComponent::class)->name('products.category');
 // For Searching Product 
 Route::get('product/search', SearchComponent::class)->name('product.search');
 // Cart Component
