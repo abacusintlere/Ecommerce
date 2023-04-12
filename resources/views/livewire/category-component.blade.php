@@ -13,7 +13,7 @@
 
             <div class="banner-shop">
                 <a href="#" class="banner-link">
-                    <figure><img src="assets/images/shop-banner.jpg" alt=""></figure>
+                    <figure><img src="{{ asset('assets/images/shop-banner.jpg') }}" alt=""></figure>
                 </a>
             </div>
 
@@ -60,14 +60,14 @@
                         <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                             <div class="product product-style-3 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
-                                        <figure><img src="{{ asset('assets/images/products/') }} {{ $product->thumbnail }}" alt="{{ $product->name }}"></figure>
+                                    <a href="#" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                                        <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}"></figure>
                                     </a>
                                 </div>
                                 <div class="product-info">
                                     <a href="#" class="product-name"><span>{{ $product->name }}</span></a>
                                     <div class="wrap-price"><span class="product-price">{{ $product->regular_price }}</span></div>
-                                    <a href="#"class="btn add-to-cart" wire:click.prevent="addToCart({{ $product->id}}, {{ $product->name }}, {{ $product->regular_price }})">Add To Cart</a>
+                                    <a href="#"class="btn add-to-cart" wire:click.prevent="addToCart('{{ $product->id}}', '{{ $product->name }}', '{{ $product->regular_price }}')">Add To Cart</a>
                                 </div>
                             </div>
                         </li>
@@ -95,12 +95,12 @@
                     <ul class="list-category">
                         @foreach ($categories as $category)
                         <li class="category-item has-child-cate">
-                            <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ $category->name }}</a>
-                            @if ($category->sub_categories)
+                            <a href="{{ route('products.category', $category->slug) }}" class="cate-link">{{ Str::title($category->name) }}</a>
+                            @if ($category->sub_categories->count()  >0)
                                 <span class="toggle-control">+</span>
                                 <ul class="sub-cate">
-                                    @foreach ($sub_categories as $sub_category)
-                                        <li class="category-item"><a href="{{ route('products.category', $sub_category->slug) }}" class="cate-link">{{ $sub_category->name }} (22)</a></li>
+                                    @foreach ($category->sub_categories as $sub_category)
+                                        <li class="category-item"><a href="{{ route('products.category', $sub_category->slug) }}" class="cate-link">{{ Str::title($sub_category->name) }} (22)</a></li>
                                     @endforeach
                                 </ul>
                             @endif
@@ -134,14 +134,9 @@
             </div><!-- brand widget-->
 
             <div class="widget mercado-widget filter-widget price-filter">
-                <h2 class="widget-title">Price</h2>
+                <h2 class="widget-title">Price: <span class="text-info">${{ $min_price }} - ${{ $max_price }}</span></h2>
                 <div class="widget-content">
-                    <div id="slider-range"></div>
-                    <p>
-                        <label for="amount">Price:</label>
-                        <input type="text" id="amount" readonly>
-                        <button class="filter-submit">Filter</button>
-                    </p>
+                    <div id="slider" wire:ignore></div>
                 </div>
             </div><!-- Price-->
 
@@ -169,7 +164,7 @@
                         <li class="list-item"><a class="filter-link " href="#">xl</a></li>
                     </ul>
                     <div class="widget-banner">
-                        <figure><img src="assets/images/size-banner-widget.jpg" width="270" height="331" alt=""></figure>
+                        <figure><img src="{{ asset('assets/images/size-banner-widget.jpg') }}" width="270" height="331" alt=""></figure>
                     </div>
                 </div>
             </div><!-- Size -->
@@ -204,3 +199,28 @@
     </div><!--end row-->
 
 </div><!--end container-->
+
+@push('scripts')
+    <script>
+        var slider = document.getElementById('slider');
+        noUiSlider.create(slider, {
+            start : [1,1000],
+            connect: true,
+            range:{
+                'min':1,
+                'max':1000
+            },
+            // Show a scale with the slider
+            pips: {
+                mode: 'steps',
+                stepped: true,
+                density: 4
+            }
+        });
+        slider.noUiSlider.on('update', function(value){
+            // console.log(value[0]);
+            @this.set("min_price", value[0]);
+            @this.set("max_price", value[1]);
+        });
+    </script>
+@endpush
