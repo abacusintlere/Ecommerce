@@ -10,7 +10,7 @@ use Illuminate\Support\Carbon;
 use Livewire\WithFileUploads;
 class AdminEditProductComponent extends Component
 {
-    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $is_active, $product_id, $newImage, $images, $newImages;
+    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category,$subcategory, $is_active, $product_id, $newImage, $images, $newImages;
 
     // Mount Function
     public function mount($product_slug)
@@ -30,6 +30,7 @@ class AdminEditProductComponent extends Component
         $this->thumbnail = $product->thumbnail;
         $this->images = explode(",", $product->images);
         $this->category = $product->category_id;
+        $this->subcategory = $product->subcategory_id;
         $this->is_active = $product->is_active;
         // dd($this->category);
     } 
@@ -44,7 +45,8 @@ class AdminEditProductComponent extends Component
     public function render()
     {
         $categories = Category::where('is_active', 1)->get();
-        return view('livewire.admin.product.admin-edit-product-component', compact('categories'))->layout('layouts.base');
+        $subcategories = Category::where('parent_id', $this->category)->get();
+        return view('livewire.admin.product.admin-edit-product-component', compact('categories', 'subcategories'))->layout('layouts.base');
     }
     
     // Updated Hook
@@ -144,6 +146,10 @@ class AdminEditProductComponent extends Component
         }
 
         $product->category_id = $this->category;
+        if($this->subcategory)
+        {
+            $product->subcategory_id = $this->subcategory;
+        }
         $product->is_active = $this->is_active;
         $product->update();
 

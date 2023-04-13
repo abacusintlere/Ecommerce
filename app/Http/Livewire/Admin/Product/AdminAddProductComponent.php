@@ -11,7 +11,7 @@ use Illuminate\Support\Carbon;
 
 class AdminAddProductComponent extends Component
 {
-    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $images, $is_active;
+    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $subcategory, $images, $is_active;
 
     // Mount Function
     public function mount()
@@ -24,7 +24,9 @@ class AdminAddProductComponent extends Component
     public function render()
     {
         $categories = Category::where('is_active', 1)->get();
-        return view('livewire.admin.product.admin-add-product-component', compact('categories'))->layout('layouts.base');
+        // dd($this->category);
+        $subcategories = Category::where('parent_id', $this->category)->get();
+        return view('livewire.admin.product.admin-add-product-component', compact('categories', 'subcategories'))->layout('layouts.base');
     }
 
     // For Generating Product Slug
@@ -48,7 +50,7 @@ class AdminAddProductComponent extends Component
             'featured' => 'required',
             'quantity' => 'required|numeric',
             'thumbnail' => 'required|mimes:png,jpg',
-            'category_id' => 'required',
+            'category' => 'required',
             'is_active' => 'required',
         ]);
     }
@@ -68,7 +70,7 @@ class AdminAddProductComponent extends Component
             'featured' => 'required',
             'quantity' => 'required|numeric',
             'thumbnail' => 'required|mimes:png,jpg',
-            'category_id' => 'required',
+            'category' => 'required',
             'is_active' => 'required',
         ]);
         $product = new Product();
@@ -102,6 +104,10 @@ class AdminAddProductComponent extends Component
         }
 
         $product->category_id = $this->category;
+        if($this->subcategory)
+        {
+            $product->subcategory_id = $this->subcategory;
+        }
         $product->is_active = $this->is_active;
         $product->save();
         session()->flash('success_message', 'Product Added Successfully!');

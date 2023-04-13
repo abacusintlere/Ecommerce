@@ -170,6 +170,20 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="subcategory" class="col-md-4 control-label">Product Sub Category</label>
+                                <div class="col-md-4">
+                                    <select id="subcategory" name="subcategory" class="form-control input-md" wire:model="subcategory">
+                                        <option value=""  selected>Select Sub Category</option>
+                                        @foreach ($subcategories as $category)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    {{-- @error('subcategory') <span class="text-danger">{{ $message }}</span> @enderror --}}
+
+                                </div>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="is_active" class="col-md-4 control-label">Product Status</label>
                                 <div class="col-md-4">
                                     <select id="is_active" name="is_active" class="form-control input-md" wire:model="is_active">

@@ -25,7 +25,7 @@
 
                     <div class="sort-item orderby ">
                         <select name="orderby" class="use-chosen" wire:model="sorting">
-                            <option value="menu_order" selected="selected">Default Sorting</option>
+                            <option value="default" selected="selected">Default Sorting</option>
                             <option value="date">Sort by Date</option>
                             <option value="price">Sort by Price: Low to High</option>
                             <option value="price-desc">Sort By Price: High to Low</option>
@@ -95,7 +95,7 @@
                     <ul class="list-category">
                         @foreach ($categories as $category)
                         <li class="category-item has-child-cate">
-                            <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}" class="cate-link">{{ Str::title($category->name) }}</a>
+                            <a href="{{ route('products.category', ['category_slug' => $category->slug]) }}" class="cate-link">{{ Str::title($category->name) }} </a>
                             @if ($category->sub_categories->count()  >0)
                                 <span class="toggle-control">+</span>
                                 <ul class="sub-cate">

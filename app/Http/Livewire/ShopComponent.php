@@ -26,18 +26,18 @@ class ShopComponent extends Component
 
     public function render()
     {
-        if($this->sorting == "data")
+        if($this->sorting == "date")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->orderBy('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         elseif($this->sorting == "price")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->orderBy('regular_price')->where('is_active', 1)->paginate($this->pagesize);
  
         }
         elseif($this->sorting == "price-desc")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->orderBy('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         else
         {

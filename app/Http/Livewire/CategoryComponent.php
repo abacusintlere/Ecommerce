@@ -34,18 +34,18 @@ class CategoryComponent extends Component
         $category = Category::where('slug', $this->category_slug)->orWhere('slug', $this->subcategory_slug)->first();
         $category_id = $category->id;
         // dd($category_id);
-        if($this->sorting == "data")
+        if($this->sorting == "date")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->whereDate('created_at', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
         }
         elseif($this->sorting == "price")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('regular_price', 'ASC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('is_active', 1)->orderBy('regular_price')->paginate($this->pagesize);
  
         }
         elseif($this->sorting == "price-desc")
         {
-            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('regular_price', 'DESC')->where('is_active', 1)->paginate($this->pagesize);
+            $products = Product::whereBetween('regular_price',[$this->min_price, $this->max_price])->where('category_id', $category_id)->orWhere('subcategory_id', $category_id)->where('is_active', 1)->orderBy('regular_price', 'DESC')->paginate($this->pagesize);
         }
         else
         {
