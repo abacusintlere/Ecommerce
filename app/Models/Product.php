@@ -47,6 +47,12 @@ class Product extends Model
 
     public function orderItems()
     {
-        return $this->hasMany(OrderItem::class, 'order_item_id', 'id');
+        return $this->hasMany(OrderItem::class, 'product_id', 'id');
+    }
+
+    // For Product Attributes Values
+    public function attributeValues()
+    {
+        return $this->hasMany(AttributeValue::class, 'product_id', 'id');
     }
 }

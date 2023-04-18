@@ -101,6 +101,22 @@
                     <div class="stock-info in-stock">
                         <p class="availability">Availability: <b>{{ $product->stock_status }}</b></p>
                     </div>
+                    <div>
+                        @foreach ($product->attributeValues->unique('product_attribute_id') as $av)
+                            <div class="row" style="margin-top:20px">
+                                <div class="col-xs-2">
+                                    <p>{{ $av->productAttribute->name }}</p>
+                                </div>
+                                <div class="col-xs-10">
+                                    <select class="form-control" width="200px">
+                                        @foreach ($av->productAttribute->attributeValues->where('product->id', $product->id) as $key =>$pav)
+                                            <option value="{{ $pav->id }}">{{ $pav->value }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                     <div class="quantity">
                         <span>Quantity:</span>
                         <div class="quantity-input">
@@ -156,14 +172,14 @@
 
                             <div class="wrap-review-form">
 
-                                <div id="comments">
+                                {{-- <div id="comments">
                                     <h2 class="woocommerce-Reviews-title">{{ $product->orderItems->where('rstatus', 1)->count() }} <span>{{ $product->name }}</span></h2>
                                     <ol class="commentlist">
                                         @foreach ($product->orderItems->where('rstatus', 1) as $orderItem)
                                             <li class="comment byuser comment-author-admin bypostauthor even thread-even depth-1"
                                                 id="li-comment-20">
                                                 <div id="comment-20" class="comment_container">
-                                                    <img alt="" src="{{ asset('assets/images/author-avata.jpg') }}" height="80" width="80">
+                                                    <img alt="{{ $orderItem->order->user->name }}" src="{{ asset('assets/images/profiles') }}/{{  $orderItem->order->user->profile->image }}" height="80" width="80">
                                                     <div class="comment-text">
                                                         <div class="star-rating">
                                                             <span class="width-{{ $orderItem->review->rating * 20 }}-percent">Rated <strong
@@ -184,7 +200,7 @@
                                         @endforeach
 
                                     </ol>
-                                </div><!-- #comments -->
+                                </div><!-- #comments --> --}}
                             </div>
                         </div>
                     </div>

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use App\Models\Profile;
 use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -25,6 +26,19 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
             'profile_photo_path' => null,
             'current_team_id' => null,
+        ]);
+
+        // Create User Profile
+        $profile = Profile::create([
+            'user_id' => $user->id,
+            'image' => 'default.png',
+            'mobile' => '03078965876',
+            'line1' => '598 Virginia Street, Apartment 2',
+            'line2' => 'River Grove IL 60171',
+            'city' => 'Boston',
+            'province' => 'California',
+            'country' => 'US',
+            'zipcode' => '7788',
         ]);
 
         $user->assignRole('User');

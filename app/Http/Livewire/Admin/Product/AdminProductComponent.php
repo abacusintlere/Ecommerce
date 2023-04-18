@@ -8,9 +8,17 @@ use Livewire\WithPagination;
 class AdminProductComponent extends Component
 {
     use WithPagination;
+    public $searchTerm;
     public function render()
     {
-        $products = Product::with('category')->paginate(10);
+        $serach = "%" . $this->searchTerm . "%";
+        $products = Product::with('category')
+            ->where('name', 'LIKE', $serach)
+            ->orWhere('stock_status', 'LIKE', $serach)
+            ->orWhere('regular_price', 'LIKE', $serach)
+            ->orWhere('sale_price', 'LIKE', $serach)
+            ->orderBy('id', 'DESC')
+            ->paginate(10);
         return view('livewire.admin.product.admin-product-component', compact('products'))->layout('layouts.base');
     }
 

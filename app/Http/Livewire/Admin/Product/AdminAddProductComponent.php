@@ -5,14 +5,34 @@ namespace App\Http\Livewire\Admin\Product;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use App\Models\ProductAttribute;
 use Illuminate\Support\Str;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Carbon;
 
 class AdminAddProductComponent extends Component
 {
-    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $subcategory, $images, $is_active;
+    public $name, $slug, $short_desc, $desc, $regular_price, $sale_price, $sku, $stock_status, $featured, $quantity, $thumbnail, $category, $subcategory, $attribute, $images, $is_active;
 
+    public $inputs = [];
+    public $attribute_array = [];
+    public $attribute_values;
+
+    // Add Attribute Value 
+    public function addAttributeValue()
+    {
+        if(!in_array($this->attribute, $this->attribute_array))
+        {
+            array_push($this->inputs, $this->attribute);
+            array_push($this->attribute_array, $this->attribute);
+        }
+    }
+
+    public function removeAttributeValue($attribute)
+    {
+        unset($this->inputs[$attribute]);
+        unset($this->attribute_array[$attribute]);
+    }
     // Mount Function
     public function mount()
     {
@@ -26,7 +46,8 @@ class AdminAddProductComponent extends Component
         $categories = Category::where('is_active', 1)->get();
         // dd($this->category);
         $subcategories = Category::where('parent_id', $this->category)->get();
-        return view('livewire.admin.product.admin-add-product-component', compact('categories', 'subcategories'))->layout('layouts.base');
+        $attributes = ProductAttribute::all();
+        return view('livewire.admin.product.admin-add-product-component', compact('categories', 'subcategories', 'attributes'))->layout('layouts.base');
     }
 
     // For Generating Product Slug
@@ -77,7 +98,7 @@ class AdminAddProductComponent extends Component
         $product->name = $this->name;
         $product->slug = $this->slug;
         $product->short_desc = $this->short_desc;
-        $product->desc = $this->desc;
+        $product->description = $this->desc;
         $product->regular_price = $this->regular_price;
         $product->sale_price = $this->sale_price;
         $product->sku = $this->sku;
@@ -110,6 +131,20 @@ class AdminAddProductComponent extends Component
         }
         $product->is_active = $this->is_active;
         $product->save();
+
+        foreach($this->attribute_values as $key => $attribute_value)
+        {
+            $values = explode(",", $attribute_value);
+
+            foreach($values as $value)
+            {
+                $attribute = new ProductAttribute();
+                $attribute->product_attribute_id = $key;
+                $attribute->attribute_value = $value;
+                $attribute->product_id = $product->id;
+                $attribute->save();
+            }
+        }
         session()->flash('success_message', 'Product Added Successfully!');
     }
 }

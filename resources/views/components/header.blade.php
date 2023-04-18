@@ -55,6 +55,9 @@
                                                 <a title="All Products" href="{{ route('admin.products') }}">All Products</a>
                                             </li>
                                             <li class="menu-item" >
+                                                <a title="All Product Attributes" href="{{ route('admin.attributes') }}">Product Attributes</a>
+                                            </li>
+                                            <li class="menu-item" >
                                                 <a title="All Orders" href="{{ route('admin.orders') }}">All Orders</a>
                                             </li>
                                             <li class="menu-item" >
@@ -86,7 +89,7 @@
                                             </li>
                                         @endrole
                                         <li class="menu-item" >
-                                            <a title="Pound (GBP)" href="#">Profile</a>
+                                            <a title="My Profile" href="{{ route('user.profile') }}">Profile</a>
                                         </li>
                                         <form action="{{ route('logout')}}" method="post" id="logout">
                                             @method('post')

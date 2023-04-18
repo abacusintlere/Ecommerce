@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\ProductAttribute;
 use App\Http\Livewire\CartComponent;
 use App\Http\Livewire\HomeComponent;
 use App\Http\Livewire\ShopComponent;
@@ -18,11 +19,13 @@ use App\Http\Livewire\PrivacyPolicyComponent;
 use App\Http\Livewire\User\UserOrderComponent;
 use App\Http\Livewire\Admin\Sale\SaleComponent;
 use App\Http\Livewire\TermsConditionsComponent;
+use App\Http\Livewire\User\UserProfileComponent;
 use App\Http\Livewire\Admin\Orders\OrderComponent;
 use App\Http\Livewire\User\UserDashboardComponent;
 use App\Http\Livewire\User\ChangePasswordComponent;
 use App\Http\Livewire\Admin\AdminDashboardComponent;
 use App\Http\Livewire\Admin\Coupons\CouponComponent;
+use App\Http\Livewire\User\UserEditProfileComponent;
 use App\Http\Livewire\Admin\Coupons\AddCouponComponent;
 use App\Http\Livewire\Admin\Coupons\EditCouponComponent;
 use App\Http\Livewire\Admin\Orders\OrderDetailsComponent;
@@ -32,11 +35,14 @@ use App\Http\Livewire\Admin\Product\AdminAddProductComponent;
 use App\Http\Livewire\Admin\Product\AdminEditProductComponent;
 use App\Http\Livewire\Admin\Category\AdminAddCategoryComponent;
 use App\Http\Livewire\Admin\HomeCategory\HomeCategoryComponent;
+use App\Http\Livewire\Admin\Attribute\ProductAttributeComponent;
 use App\Http\Livewire\Admin\Category\AdminEditCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminHomeSliderComponent;
 use App\Http\Livewire\Admin\HomeCategory\AddHomeCategoryComponent;
+use App\Http\Livewire\Admin\Attribute\AddProductAttributeComponent;
 use App\Http\Livewire\Admin\HomeCategory\EditHomeCategoryComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminAddHomeSliderComponent;
+use App\Http\Livewire\Admin\Attribute\EditProductAttributeComponent;
 use App\Http\Livewire\Admin\HomeSlider\AdminEditHomeSliderComponent;
 use App\Http\Livewire\Admin\ContactUsComponent as AdminContactUsComponent;
 
@@ -99,6 +105,13 @@ Route::middleware([
 
     ################################## User Change Password ########################################
     Route::get('user/password/change', ChangePasswordComponent::class)->name('user.password.change');
+    
+    ################################## User Profile ########################################
+    Route::get('user/profile', UserProfileComponent::class)->name('user.profile');
+
+    ################################## User Edit Profile ########################################
+    Route::get('user/edit/profile', UserEditProfileComponent::class)->name('user.edit.profile');
+
 });
 
 // Authentication Routes For Admin
@@ -152,4 +165,11 @@ Route::middleware([
 
     ################################## Contact Us Message ########################################
     Route::get('admin/contact/messages', AdminContactUsComponent::class)->name('admin.contact.messages');
+
+    ################################## Coupons ########################################
+    Route::get('admin/attributes', ProductAttributeComponent::class)->name('admin.attributes');
+    // For Category Addition
+    Route::get('admin/attributes/add', AddProductAttributeComponent::class)->name('admin.add.attribute');
+    // For Editing Category
+    Route::get('admin/attributes/edit/{attribute_id}', EditProductAttributeComponent::class)->name('admin.edit.attribute');
 });

@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel heading">
+                    <div class="panel-heading">
                         <div class="row">
                             <div class="col-md-6">
                                 Add New Product
@@ -27,7 +27,6 @@
 
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="product_slug" class="col-md-4 control-label">Product Slug</label>
                                 <div class="col-md-4">
@@ -182,6 +181,36 @@
 
                                 </div>
                             </div>
+
+                            <div class="form-group">
+                                <label for="attribute" class="col-md-4 control-label">Product Attribute</label>
+                                <div class="col-md-3">
+                                    <select id="attribute" name="attribute" class="form-control input-md" wire:model="attribute">
+                                        <option value="" selected>Select Attribute</option>
+                                        @foreach ($attributes as $attribute)
+                                            <option value="{{ $attribute->id }}">{{ $attribute->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-1">
+                                    <button type="button" class="btn btn-info" wire:click.prevent='addAttributeValue'>Add</button>
+                                </div>
+                            </div>
+
+                            @foreach ($inputs as $key => $value)
+                                <div class="form-group">
+                                    {{-- {{  $attribute_array[$key] }} --}}
+                                    <label for="sku" class="col-md-4 control-label">{{ $attributes->where('id', $attribute_array[$key])->first()->name }}</label>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control input-md" placeholder="{{ $attributes->where('id', $attribute_array[$key])->first()->name }}" wire:model="attribute_values.{{ $value }}">
+
+                                    </div>
+
+                                    <div class="col-md-1">
+                                        <button type="button" class="btn btn-danger btn-sm" wire:click.prevent='removeAttributeValue({{ $key }})'>Remove</button>
+                                    </div>
+                                </div>
+                            @endforeach
 
                             <div class="form-group">
                                 <label for="is_active" class="col-md-4 control-label">Product Status</label>
