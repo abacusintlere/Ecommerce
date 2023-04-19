@@ -85,7 +85,7 @@
                         <li class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
                             <div class="product product-style-3 equal-elem ">
                                 <div class="product-thumnail">
-                                    <a href="detail.html" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
+                                    <a href="{{ route('product.details', $product->slug) }}" title="T-Shirt Raw Hem Organic Boro Constrast Denim">
                                         <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}"></figure>
                                     </a>
                                 </div>
@@ -209,7 +209,7 @@
                         <li class="product-item">
                             <div class="product product-widget-style">
                                 <div class="thumbnnail">
-                                    <a href="detail.html" title="{{ $product->name }}">
+                                    <a href="{{ route('product.details', $product->slug) }}" title="{{ $product->name }}">
                                         <figure><img src="{{ asset('assets/images/products') }}/{{ $product->thumbnail }}" alt="{{ $product->name }}" alt="{{ $product->name }}"></figure>
                                     </a>
                                 </div>

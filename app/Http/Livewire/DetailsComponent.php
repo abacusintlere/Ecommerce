@@ -9,7 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class DetailsComponent extends Component
 {
-    public $slug, $qty;
+    public $slug, $qty, $satt=[];
 
     public function mount($slug)
     {
@@ -30,7 +30,7 @@ class DetailsComponent extends Component
     public function addToCart($product_id, $product_name, $product_price)
     {
         // You can even make it a one-liner
-        Cart::add($product_id, $product_name, 1, $product_price)->associate('Product');
+        Cart::instance('cart')->add($product_id, $product_name, 1, $product_price, $this->satt)->associate('Product');
         session()->flash("success_message", "Product Added To Cart");
         return redirect()->route('cart');
     }
